@@ -1,0 +1,24 @@
+<form class="py-4" [formGroup]="form" (ngSubmit)="send()">
+  <div class="form-group">
+    <label for="name">নাম</label>
+    <input class="form-control" id="name" placeholder="নাম" formControlName="name">
+    <small class="form-text text-danger" *ngIf="form.controls.name.errors?.required && form.controls.name.dirty">নাম প্রয়োজন</small>
+  </div>
+  <div class="form-group">
+    <label for="email">ইমেইল </label>
+    <input type="email" class="form-control" id="email" placeholder="ইমেইল" formControlName="email">
+    <small class="form-text text-danger" *ngIf="form.controls.email.errors && form.controls.email.dirty">
+      <span *ngIf="form.controls.email.errors.required">ইমেইল প্রয়োজন</span>
+      <span *ngIf="form.controls.email.errors.email">ইমেইল ফরম্যাট ঠিক নাই</span>
+    </small>
+  </div>
+  <div class="form-group">
+    <label for="password">পাসওয়ার্ড</label>
+    <input type="password" class="form-control" id="password" placeholder="পাসওয়ার্ড" formControlName="password">
+    <small class="form-text text-danger" *ngIf="form.controls.password.errors && form.controls.password.dirty">
+      <span *ngIf="form.controls.password.errors.required">পাসওয়ার্ড প্রয়োজন</span>
+      <span *ngIf="form.controls.password.errors.minlength">কমপক্ষে ৬ অক্ষর </span>
+    </small>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">রেজিস্টার</button>
+</form>

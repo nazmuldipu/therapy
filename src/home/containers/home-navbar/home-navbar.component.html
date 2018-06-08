@@ -1,0 +1,60 @@
+<div class="header">
+  <!-- header -->
+  <div class="container">
+    <div class="row company">
+      <div class="col-md-5 company_logo">
+        <a routerLink="/">
+          <img src="assets/images/logo.ico" height="60" width="60">
+          <span class="company_logo_name">মন ফিজিওথেরাপি</span>
+        </a>
+      </div>
+      <div class="col-md-7 company_header">
+        <span class="company_header_phone">+88 01929 241 312</span>
+        <span class="company_header_email">
+          <a href="#">nazmuldipu@gmail.com</a>
+        </span>
+        <span class="company_header_time">আমরা শনিবার থেকে বৃহস্পতিবার প্রতিদিন বিকাল ৪:০০টা থেকে ৮:০০টা পর্যন্ত খোলা </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-expand-md navbar-dark">
+  <div class="container">
+    <!-- <a class="navbar-brand" href="#">Top navbar</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+      (click)="toggleCollapse()" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse show" id="navbarCollapse" [class.show]="show">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item active">
+        <a class="nav-link" href="#">হোম
+            <span class="sr-only">(current)</span>
+          </a>
+        </li> -->
+
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item"> </li>
+        <li ngbDropdown *ngIf="appUser; else  anonymousUser" class="nav-item dropdown">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{appUser?.name}}</a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" routerLink="/dashboard">
+              <i class="fa fa-tachometer"></i> ড্যাশবোর্ড </a>
+            <a class="dropdown-item" routerLink="/dashboard/users/changePassword">
+              <i class="fa fa-unlock-alt"></i> পাসওয়ার্ড পরিবর্তন </a>
+            <a class="dropdown-item" (click)="logout()">
+              <i class="fa fa-sign-out"></i> লগ আউট</a>
+          </div>
+        </li>
+        <ng-template #anonymousUser>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">লগইন</a>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 login">
+      <div class="login-header">
+        <div class="login-header-logo">
+          <img class="login-header-logo-img" src="assets/images/logo.ico">
+        </div>
+        <a routerLink="/">
+          <div class="login-header-title">মন ফিজিওথেরাপি</div>
+        </a>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center login-tab">
+          <a [ngClass]="login?'active':''" (click)="loginClicked()">লগইন</a> |
+          <a [ngClass]="login?'':'active'" (click)="registerClicked()">রেজিস্টার</a>
+        </div>
+      </div>
+      <small class="form-text text-danger" *ngIf="errorMessage">{{errorMessage}}</small>
+      <div *ngIf="login" class="col-12 login-form">
+        <login-form (login)="onLogin($event)"></login-form>
+      </div>
+      <div *ngIf="!login" class="col-12 register-form">
+        <register-form (register)="onRegister($event)"></register-form>
+      </div>
+    </div>
+  </div>
+</div>

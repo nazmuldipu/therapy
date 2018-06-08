@@ -1,0 +1,47 @@
+.login {
+  margin-top: 100px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+  &-header {
+    &-logo {
+      display: inline-block;
+      margin: 10px;
+      &-img {
+        height: 70px;
+        width: 70px;
+      }
+    }
+    &-title {
+      display: inline-block;
+      font-family: SolaimanLipi;
+      font-size: 30px;
+      text-align: center;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    a:hover {
+      color: darkslategray;
+    }
+  }
+  &-tab {
+    color: white;
+    font-size: 20px;
+    background-color: #1f7b76;
+    padding: 10px 0;
+    border-bottom: 4px solid #74b281;
+  }
+  &-tab a {
+    cursor: pointer;
+    color: #74b281;
+  }
+  &-tab a.active {
+    color: white;
+    font-weight: 900;
+  }
+}
+@media (max-width: 767px) {
+  .login {
+    margin-top: 50px;
+  }
+}
