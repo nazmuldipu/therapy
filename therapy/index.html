@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>মন ফিজিওথেরাপি</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <style>
+    .loading {
+      text-align: center;
+      font-size: 40px;
+      font-weight: 200;
+      font-family: 'SolaimanLipi';
+      color: yellow;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      margin: 20px auto;
+      background-color: yellow;
+      -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+      animation: sk-rotateplane 1.2s infinite ease-in-out;
+    }
+
+    @-webkit-keyframes sk-rotateplane {
+      0% {
+        -webkit-transform: perspective(120px)
+      }
+      50% {
+        -webkit-transform: perspective(120px) rotateY(180deg)
+      }
+      100% {
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+      }
+    }
+
+    @keyframes sk-rotateplane {
+      0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+      }
+      50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+      }
+      100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+      }
+    }
+  </style>
+<link rel="stylesheet" href="styles.f1b05dd71244c00a235b.css"></head>
+
+<body>
+
+  <app-root>
+    <div style="background-color: #8c1e18; padding: 10px 0;">
+      <div class="spinner"></div>
+      <div class="loading">
+        মন ফিজিওথেরাপি
+      </div>
+    </div>
+  </app-root>
+<script type="text/javascript" src="runtime.2843f56fb6557f2afc3c.js"></script><script type="text/javascript" src="polyfills.9a5f6d04e0781d28c53e.js"></script><script type="text/javascript" src="main.707d019e12bce794f6e9.js"></script></body>
+
+</html>
