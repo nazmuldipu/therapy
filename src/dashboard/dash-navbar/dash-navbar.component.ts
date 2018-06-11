@@ -1,22 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../shared/services/auth.service';
+import { NavbarService } from 'src/shared/services/navbar.service';
+import { AuthService } from 'src/shared/services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { User } from 'src/shared/models/users.model';
 import { map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
+import { User } from 'src/shared/models/users.model';
+import { createTokenForExternalReference } from '@angular/compiler/src/identifiers';
 
 @Component({
-  selector: 'home-navbar',
-  templateUrl: './home-navbar.component.html',
-  styleUrls: ['./home-navbar.component.scss']
+  selector: 'dash-navbar',
+  templateUrl: './dash-navbar.component.html',
+  styleUrls: ['./dash-navbar.component.scss']
 })
-export class HomeNavbarComponent implements OnInit {
+export class DashNavbarComponent implements OnInit {
+  appUser: User;
   show = false;
-  appUser;
   subscription: Subscription;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private sideNav: NavbarService,
+    public auth: AuthService,
+    private router: Router
+  ) {}
 
   async ngOnInit() {
     this.subscription = await this.auth
@@ -35,21 +41,19 @@ export class HomeNavbarComponent implements OnInit {
           this.appUser = data as User;
           localStorage.setItem('companyId', this.appUser.companyId);
         }
-        console.log(data);
       });
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  logout() {
-    this.appUser = null;
-    this.auth.logout();
-    this.router.navigate(['/login']);
+  setSideNav() {
+    this.sideNav.setSideNavBarCollapse();
   }
 
   toggleCollapse() {
     this.show = !this.show;
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

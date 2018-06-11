@@ -4,10 +4,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/internal/Observable';
+import { User } from 'src/shared/models/users.model';
 
 @Injectable()
 export class AuthService {
   user$: Observable<firebase.User>;
+  user: User;
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -44,7 +46,7 @@ export class AuthService {
         companyId: companyId,
         name: name,
         email: email,
-        roles: 'USER'
+        roles: ['USER']
       });
   }
 

@@ -4,7 +4,7 @@
     <div class="row company">
       <div class="col-md-5 company_logo">
         <a routerLink="/">
-          <img src="assets/images/logo.ico" height="60" width="60">
+          <img src="assets/images/logo.ico" height="40" width="60">
           <span class="company_logo_name">মন ফিজিওথেরাপি</span>
         </a>
       </div>
@@ -38,7 +38,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item"> </li>
-        <li ngbDropdown *ngIf="appUser; else  anonymousUser" class="nav-item dropdown">
+        <li ngbDropdown *ngIf="appUser; else  anonymousUser" placement="bottom-right" class="nav-item dropdown">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{appUser?.name}}</a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" routerLink="/dashboard">

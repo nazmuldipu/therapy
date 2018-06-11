@@ -8,18 +8,27 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { SharedModule } from '../shared/shared.module';
+import { AuthGuard } from '../shared/services/auth-guard.service';
 
 // routes
 export const ROUTES: Routes = [
   {
     path: '',
     loadChildren: '../home/home.module#HomeModule'
-  }
+  },
+  {
+    path: 'dashboard',
+    loadChildren: '../dashboard/dashboard.module#DashboardModule',
+    canActivate: [AuthGuard]
+  },
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    SharedModule,
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     NgbModule.forRoot(),

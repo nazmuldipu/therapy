@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-md navbar-light">
+  <div class="container-fluid">
+    <a class="ml-2 border px-2 py-1" [routerLink] (click)="setSideNav()">
+      <span class="navbar-toggler-icon m-0"></span>
+    </a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+      (click)="toggleCollapse()" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+
+    <div class="collapse navbar-collapse show" id="navbarCollapse" [class.show]="show">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item left-border">
+          <img src="assets/images/logo.ico" height="40" width="60">
+          <span class="company_logo_name">মন ফিজিওথেরাপি</span>
+        </li> -->
+      </ul>
+      <ul class="navbar-nav">
+        <!-- <li ngbDropdown *ngIf="appUser; else  anonymousUser" placement="bottom-right" class="nav-item dropdown left-border">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{appUser?.name}}</a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" routerLink="/dashboard">
+              <i class="fa fa-user"></i> প্রোফাইল </a>
+            <a class="dropdown-item" routerLink="/dashboard/users/changePassword">
+              <i class="fa fa-unlock-alt"></i> পাসওয়ার্ড পরিবর্তন </a>
+            <a class="dropdown-item" (click)="logout()">
+              <i class="fa fa-sign-out"></i> লগ আউট</a>
+          </div>
+        </li>
+        <ng-template #anonymousUser>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">লগইন</a>
+          </li>
+        </ng-template> -->
+      </ul>
+    </div>
+  </div>
+</nav>

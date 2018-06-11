@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <div class="row m-0">
+    <div class="col-12 my-4 components">
+      <div class="components__title d-flex justify-content-between">
+        <h3>
+          <img src="assets/svgs/patient.svg"> নতুন রোগী </h3>
+        <a class="btn__add raised" routerLink="/dashboard/patients">
+          <i class="fa fa-th-list"></i>&nbsp; Patient List
+        </a>
+      </div>
+
+      <div class="components-form">
+        <div class="components-form-title">
+          {{currentTitle}} - Step {{currentForm}} out of 4
+        </div>
+
+        <div class="row">
+          <form class="offset-md-2 col-md-8">
+            <patient-basic-info-form *ngIf="currentForm == 1" [parent]="form" (next)="onNext($event)"></patient-basic-info-form>
+            <patient-assesment-form *ngIf="currentForm == 2" [parent]="form" (next)="onNext($event)"></patient-assesment-form>
+            <patient-treatments-form *ngIf="currentForm == 3" [parent]="form" (next)="onNext($event)"></patient-treatments-form>
+            <patient-fee-form *ngIf="currentForm == 4" [parent]="form" (next)="onNext($event)"></patient-fee-form>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
