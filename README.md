@@ -1,2 +1,2 @@
 ng build --prod --base-href "/"
-ngh --no-silent
+ngh --dir dist/therapy --no-silent

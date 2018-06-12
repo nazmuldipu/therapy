@@ -1,0 +1,38 @@
+<div class="item">
+  <a (click)="onDetails(patient?.id)">
+    <div class="item-title">
+      <div class="item-title-name">
+        {{patient?.basic?.name}}
+      </div>
+      <div class="item-title-text">
+        শেষ ভিসিট : {{patient?.updateDate?.toDate() | date:'dd-MM-yyyy'}}
+      </div>
+      <div class="item-title-text">
+        ফোন : {{patient?.basic?.phone}}
+      </div>
+    </div>
+  </a>
+
+  <div class="row m-0 my-3">
+    <div class="col-6">
+      <span class="item-box">
+        <i class="fa fa-history"></i> {{patient?.totalSession }} সেশন</span>
+    </div>
+    <div class="col-6">
+      <span class="item-box">
+        <i class="fa fa-try"></i> {{patient?.balance}} ৳</span>
+    </div>
+  </div>
+  <div class="row m-0 my-3">
+    <div class="col-6">
+      <button type="button" class="btn btn-light btn-block">
+        <i class="fa fa-plus"></i> নতুন সেশন</button>
+      <!-- <i class="fa fa-plus"></i> নতুন সেশন -->
+    </div>
+    <div class="col-6">
+      <button type="button" class="btn btn-light btn-block">
+        <i class="fa fa-money"></i> জমা </button>
+    </div>
+  </div>
+
+</div>

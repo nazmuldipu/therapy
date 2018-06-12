@@ -9,6 +9,9 @@ import { PatientAssesmentFormComponent } from './components/patient-assesment-fo
 import { PatientTreatmentsFormComponent } from './components/patient-treatments-form/patient-treatments-form.component';
 import { PatientFeeFormComponent } from './components/patient-fee-form/patient-fee-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { PatientItemComponent } from './components/patient-item/patient-item.component';
+import { DetailsComponent } from './containers/details/details.component';
+import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 
 // routes
 export const ROUTES: Routes = [
@@ -19,6 +22,14 @@ export const ROUTES: Routes = [
   {
     path: 'new',
     component: NewComponent
+  },
+  {
+    path: 'new/:id',
+    component: NewComponent
+  },
+  {
+    path: 'details/:id',
+    component: DetailsComponent
   }
 ];
 
@@ -36,7 +47,10 @@ export const ROUTES: Routes = [
     PatientBasicInfoFormComponent,
     PatientAssesmentFormComponent,
     PatientTreatmentsFormComponent,
-    PatientFeeFormComponent
+    PatientFeeFormComponent,
+    PatientItemComponent,
+    DetailsComponent,
+    PatientDetailsComponent
   ]
 })
 export class PatientsModule {}

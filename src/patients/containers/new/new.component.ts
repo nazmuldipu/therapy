@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Patient } from '../../../shared/models/patient.model';
 import { PatientService } from '../../../shared/services/patient.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new',
@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./new.component.scss']
 })
 export class NewComponent implements OnInit {
+  id;
+  exists = false;
+  patient: Patient;
   currentForm = 1;
   currentTitle = 'সাধারণ তথ্য';
 
@@ -18,6 +21,7 @@ export class NewComponent implements OnInit {
       date: ['', Validators.required],
       name: ['', Validators.required],
       age: ['', Validators.required],
+      gender: ['', Validators.required],
       phone: ['', Validators.required]
     }),
     assesments: this.fb.group({
@@ -44,13 +48,23 @@ export class NewComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private patientService: PatientService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) {
+    this.id = activeRoute.snapshot.paramMap.get('id');
+  }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    if (this.id) {
+      await this.patientService.get(this.id).subscribe(data => {
+        this.patient = data as Patient;
+        this.form.patchValue(data);
+        this.exists = true;
+      });
+    }
+  }
 
   onNext(event) {
-    console.log(event);
     switch (event) {
       case 0:
         if (confirm('আনপনি কি নিশ্চিত যে আপনি ফেরত যেতে চান ? ')) {
@@ -79,28 +93,36 @@ export class NewComponent implements OnInit {
         break;
 
       case 5:
-        console.log(this.form.value);
         const patient = this.cleanObject(this.form.value) as Patient;
+        if (!this.exists) {
+          //create diff date specially different time for session
+          let dumy = new Date(patient.date);
+          const dat = new Date();
+          dat.setFullYear(dumy.getFullYear());
+          dat.setMonth(dumy.getMonth());
+          dat.setDate(dumy.getDate());
 
-        //create diff date specially different time for session
-        let dumy = new Date(patient.date);
-        const dat = new Date();
-        dat.setFullYear(dumy.getFullYear());
-        dat.setMonth(dumy.getMonth());
-        dat.setDate(dumy.getDate());
+          patient.date = dat;
+          patient.balance = patient.fees.prescribeFee;
+          patient.totalSession = 1;
 
-        patient.date = dat;
-        patient.balance = patient.fees.prescribeFee;
-
-        this.patientService.create(patient).then(ref => {
-          console.log('ref ', ref);
-          patient.id = ref.id;
-          this.form.reset();
-          this.currentForm = 1;
-          this.currentTitle = 'সাধারণ তথ্য';
-          // this.createSession(patient);
-          // this.createLedter(patient);
-        });
+          this.patientService.create(patient).then(ref => {
+            console.log('ref ', ref);
+            patient.id = ref.id;
+            this.form.reset();
+            this.currentForm = 1;
+            this.currentTitle = 'সাধারণ তথ্য';
+            // this.createSession(patient);
+            // this.createLedter(patient);
+          });
+        } else {
+          const value = { ...this.patient, ...patient };
+          this.patientService.update(this.id, value).then(ref => {
+            this.form.reset();
+            this.currentForm = 1;
+            this.currentTitle = 'সাধারণ তথ্য';
+          });
+        }
         break;
     }
   }

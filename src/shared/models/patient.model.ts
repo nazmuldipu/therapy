@@ -1,7 +1,9 @@
 export interface Patient {
   id: string;
   createdDate: Date;
+  updateDate: Date;
   date: Date;
+  totalSession: number;
   companyId: string;
   basic: BasicInfo;
   assesments: Assesments;
@@ -16,6 +18,7 @@ interface BasicInfo {
   age: string;
   date: Date;
   phone: string;
+  gender: string;
 }
 
 interface Assesments {

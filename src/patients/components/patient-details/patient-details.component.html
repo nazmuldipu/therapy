@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row m-0 my-4">
+        <div class="col-12 p-0 patient">
+            <div class="patient-head">
+                <div class="container p-0">
+                    <div class="row">
+                        <div class="col-md-3 text-center p-4">
+                            <i class="fa fa-user-o fa-5x" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="patient-head-title d-flex justify-content-between">
+                                <div class="patient-head-tite-name ">
+                                    {{patient?.basic?.name}}
+                                </div>
+                                <div class="patient-head-title-button ">
+                                    <a class="btn btn-warning btn-sm" routerLink="/dashboard/patients/new/{{patient?.id}}">Edit</a>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <i class="fa fa-venus-mars "></i>&nbsp; লিঙ্গ</td>
+                                            <td>:</td>
+                                            <td>{{patient?.basic?.gender}}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i class="fa fa-birthday-cake "></i>&nbsp; বয়স</td>
+                                            <td>:</td>
+                                            <td>{{patient?.basic?.age}}</td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <table class="table-responsive ">
+                                        <tr>
+
+                                            <td>
+                                                <i class="fa fa-volume-control-phone "></i>&nbsp; ফোন</td>
+                                            <td>:</td>
+                                            <td>{{patient?.basic?.phone}}</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <i class="fa fa-calendar "></i>&nbsp; তারিখ </td>
+                                            <td>:</td>
+                                            <td>{{patient?.basic?.date}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="row ">
+                                <button class="btn btn-primary mx-1 ">প্রেসক্রিপশন</button>
+                                <button class="btn btn-secondary mx-1 ">সেশনগুলো</button>
+                                <button class="btn btn-secondary mx-1 ">খতিয়ান</button>
+                                <a class="btn btn-light mx-1" [routerLink]="['/dashboard/patients']">রোগীর তালিকা </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{{patient | json}}
