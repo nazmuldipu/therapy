@@ -5,7 +5,7 @@
         {{patient?.basic?.name}}
       </div>
       <div class="item-title-text">
-        শেষ ভিসিট : {{patient?.updateDate?.toDate() | date:'dd-MM-yyyy'}}
+        শেষ ভিসিট : {{patient?.updateDate.seconds * 1000 | date:'dd-MM-yyyy'}}
       </div>
       <div class="item-title-text">
         ফোন : {{patient?.basic?.phone}}

@@ -1,7 +1,9 @@
+import { Timestamp } from '@firebase/firestore-types';
+
 export interface Patient {
   id: string;
-  createdDate: Date;
-  updateDate: Date;
+  createdDate: Timestamp;
+  updateDate: Timestamp;
   date: Date;
   totalSession: number;
   companyId: string;
