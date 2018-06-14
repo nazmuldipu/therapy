@@ -7,7 +7,7 @@ import { PSession } from 'src/shared/models/session.model';
   styleUrls: ['./session-item.component.scss']
 })
 export class SessionItemComponent {
-  @Input() psession: PSession;
+  @Input() psession;
 
   @Output() edit = new EventEmitter<string>();
 

@@ -53,7 +53,6 @@ export class ByPatientComponent implements OnInit {
     this.sessions = [];
     await this.sessionService.getSessionByPatientId(event).subscribe(data => {
       this.sessions = data;
-      console.log(this.sessions);
     });
   }
 }
