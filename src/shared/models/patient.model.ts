@@ -2,11 +2,11 @@ import { Timestamp } from '@firebase/firestore-types';
 
 export interface Patient {
   id: string;
-  createdDate: Timestamp;
-  updateDate: Timestamp;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+  companyId: string;
   date: Date;
   totalSession: number;
-  companyId: string;
   basic: BasicInfo;
   assesments: Assesments;
   cures: Cures;

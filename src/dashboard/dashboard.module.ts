@@ -17,6 +17,10 @@ export const ROUTES: Routes = [
       {
         path: 'patients',
         loadChildren: '../patients/patients.module#PatientsModule'
+      },
+      {
+        path: 'sessions',
+        loadChildren: '../sessions/sessions.module#SessionsModule'
       }
     ]
   }

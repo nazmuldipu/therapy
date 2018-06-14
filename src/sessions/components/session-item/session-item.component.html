@@ -1,0 +1,11 @@
+<div class="list-item">
+  <a [routerLink]>
+    <p class="list-item__name">{{ psession?.patientName}}</p>
+    <p class="list-item__details"> Date: {{psession?.date.toDate() | date:'dd-MM-yyyy'}} | Session Number: {{ psession?.sessionNumber }} | Treatments: {{
+      psession?.treatments}}
+    </p>
+  </a>
+  <button class="trash" type="button" (click)="editSession(psession.id)">
+    <i class="fa fa-pencil-square-o"></i>
+  </button>
+</div>

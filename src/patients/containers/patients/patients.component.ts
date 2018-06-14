@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class PatientsComponent implements OnInit {
   companyId;
   patients: Patient[];
-  subscription: Subscription;
 
   constructor(private patientService: PatientService, private router: Router) {
     this.companyId = localStorage.getItem('companyId');
@@ -21,16 +20,15 @@ export class PatientsComponent implements OnInit {
   ngOnInit() {
     this.onPaginate({
       companyId: this.companyId,
-      orderBy: 'date',
       order: 'desc',
       limit: 9,
       startAfter: new Date()
     });
   }
 
-  async onPaginate({ companyId, orderBy, order, limit, startAfter }: any) {
-    this.subscription = await this.patientService
-      .getPaginatedStartAfter(companyId, orderBy, order, limit, startAfter)
+  async onPaginate({ companyId, order, limit, startAfter }: any) {
+    await this.patientService
+      .getPaginatedStartAfter(companyId, order, limit, startAfter)
       .subscribe(data => {
         this.patients = data;
       });

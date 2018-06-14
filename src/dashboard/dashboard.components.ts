@@ -6,17 +6,20 @@ import { NavbarService } from '../shared/services/navbar.service';
   template: `
     
   <dash-navbar></dash-navbar>
-  <div class="container-fluid p-0">
-  <side-navbar></side-navbar>
-      <div class="row m-0" >
-        <div [ngClass]="navCollaps? 'col-md-12 p-0' : 'side-nav-offset col-md-12'">
-          <router-outlet></router-outlet>
-        </div>
+  <div class="container-fluid dashboard p-0">
+    <side-navbar></side-navbar>
+    <div class="row m-0" >
+      <div [ngClass]="navCollaps? 'col-md-12 p-0' : 'side-nav-offset col-md-12'">
+        <router-outlet></router-outlet>
       </div>
     </div>
+  </div>
   `,
   styles: [
     `
+      .dashboard {
+        padding-top: 54px !important;
+      }
       .side-nav-offset {
         padding-left: 300px;
         padding-right: 0;

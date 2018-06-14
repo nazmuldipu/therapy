@@ -1,0 +1,11 @@
+<div class="list-item">
+  <a routerLink="/dashboard/patients/details/{{ patient.id }}">
+    <p class="list-item__name">{{ patient?.basic?.name }}</p>
+    <p class="list-item__details"> Last came: {{patient?.updatedAt.seconds * 1000 | date:'dd-MM-yyyy'}} | Phone: {{ patient?.basic?.phone }} | Balance:
+      {{ patient.balance}}
+    </p>
+  </a>
+  <button class="trash" type="button" (click)="editPatient(patient.id)">
+    <i class="fa fa-pencil-square-o"></i>
+  </button>
+</div>

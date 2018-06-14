@@ -3,9 +3,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Patient } from '../../../shared/models/patient.model';
 import { PatientService } from '../../../shared/services/patient.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SessionService } from 'src/shared/services/session.service';
+import { PSession } from '../../../shared/models/session.model';
+import { PatientLedgerService } from 'src/shared/services/patient-ledger.service';
+import { PatientLedger } from '../../../shared/models/patient-ledger.model';
 
 @Component({
-  selector: 'app-new',
+  selector: 'new-patient',
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.scss']
 })
@@ -48,6 +52,8 @@ export class NewComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private patientService: PatientService,
+    private sessionService: SessionService,
+    private patientLedgerService: PatientLedgerService,
     private router: Router,
     private activeRoute: ActivatedRoute
   ) {
@@ -94,26 +100,21 @@ export class NewComponent implements OnInit {
 
       case 5:
         const patient = this.cleanObject(this.form.value) as Patient;
+        patient.basic = this.cleanObject(patient.basic);
+        patient.assesments = this.cleanObject(patient.assesments);
+        patient.cures = this.cleanObject(patient.cures);
         if (!this.exists) {
-          //create diff date specially different time for session
-          let dumy = new Date(patient.date);
-          const dat = new Date();
-          dat.setFullYear(dumy.getFullYear());
-          dat.setMonth(dumy.getMonth());
-          dat.setDate(dumy.getDate());
-
-          patient.date = dat;
+          patient.date = this.updateDateObject(patient.basic.date);
           patient.balance = patient.fees.prescribeFee;
           patient.totalSession = 1;
 
           this.patientService.create(patient).then(ref => {
-            console.log('ref ', ref);
             patient.id = ref.id;
             this.form.reset();
             this.currentForm = 1;
             this.currentTitle = 'সাধারণ তথ্য';
-            // this.createSession(patient);
-            // this.createLedter(patient);
+            this.createSession(patient);
+            this.createLedter(patient);
           });
         } else {
           const value = { ...this.patient, ...patient };
@@ -127,6 +128,39 @@ export class NewComponent implements OnInit {
     }
   }
 
+  async createSession(patient: Patient) {
+    let treatments = '';
+    if (patient.cures.treatments) {
+      patient.cures.treatments.forEach(element => {
+        treatments += element + ', ';
+      });
+    }
+    const session = {
+      date: patient.date,
+      patientId: patient.id,
+      patientName: patient.basic.name,
+      chiefComplain: patient.assesments.chiefComplain,
+      sessionNumber: 1,
+      treatments: treatments,
+      comments: 'First session',
+      sessionFee: patient.fees.sessionFee
+    } as PSession;
+    await this.sessionService.create(session);
+  }
+
+  async createLedter(patient: Patient) {
+    const pledger = {
+      patientId: patient.id,
+      date: patient.date,
+      explanation: 'First session ',
+      debit: patient.fees.prescribeFee,
+      credit: 0,
+      balance: patient.fees.prescribeFee
+    } as PatientLedger;
+
+    await this.patientLedgerService.create(pledger);
+  }
+
   cleanObject(myObj) {
     Object.keys(myObj).forEach(
       key =>
@@ -134,5 +168,14 @@ export class NewComponent implements OnInit {
         delete myObj[key]
     );
     return myObj;
+  }
+
+  updateDateObject(d: any): Date {
+    let dumy = new Date(d);
+    const dat = new Date();
+    dat.setFullYear(dumy.getFullYear());
+    dat.setMonth(dumy.getMonth());
+    dat.setDate(dumy.getDate());
+    return dat;
   }
 }

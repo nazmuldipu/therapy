@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <div class="row m-0 my-4">
+
+    <div class="col-12 p-0 patient">
+      <div class="patient-head">
+        <div class="container">
+          <div class="row m-0">
+
+            <div class="col-12 col-md-6 patients">
+              <div class="patients__title d-flex justify-content-between">
+                <h3>
+                  <img src="assets/svgs/patients.svg"> Patient List
+                </h3>
+                <a class="btn__add raised" routerLink="/dashboard/sessions">
+                  <i class="fa fa-list"></i>&nbsp; Session list
+                </a>
+              </div>
+
+              <div *ngIf="patients; else ploading">
+                <div class="message" *ngIf="!patients.length">
+                  <i class="fa fa-frown-o"></i>&nbsp; No patients added yet
+                </div>
+                <div *ngFor="let patient of patients">
+                  <patient-list [patient]="patient" (edit)="onEdit($event)"></patient-list>
+                </div>
+                <paginate-reverse [firstVisibleDate]="firstVisibleDate" [lastVisibleDate]="lastVisibleDate" (paginate)="onPaginate($event)"></paginate-reverse>
+              </div>
+
+              <ng-template #Ploading>
+                <div class="message">
+                  <i class="fa fa-refresh"></i>&nbsp; Patients loading...
+                </div>
+              </ng-template>
+
+            </div>
+
+            <div class="col-12 col-md-6 patients">
+              <div class="patients__title d-flex justify-content-between">
+                <h3>
+                  <img src="assets/svgs/patients.svg"> Session List
+                </h3>
+                <a class="btn__add raised" routerLink="/dashboard/sessions/new">
+                  <i class="fa fa-plus"></i>&nbsp; New Session
+                </a>
+              </div>
+
+              <div *ngIf="sessions; else loading">
+                <div class="message" *ngIf="!sessions.length">
+                  <i class="fa fa-frown-o"></i>&nbsp; No session added yet
+                </div>
+                <div *ngFor="let session of sessions">
+                  <session-item [psession]="session" (edit)="onEdit($event)"></session-item>
+                </div>
+              </div>
+
+              <ng-template #loading>
+                <div class="message">
+                  <i class="fa fa-thumb-tack"></i>&nbsp; Select a patient first...
+                </div>
+              </ng-template>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

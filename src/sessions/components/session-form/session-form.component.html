@@ -1,0 +1,33 @@
+<form class="m-4" [formGroup]="form" (ngSubmit)="saveSession()">
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input class="form-control" type="date" id="date" formControlName="date">
+    <small class="form-text text-danger" *ngIf="form.controls.date.invalid && form.controls.date.touched">Date Required.</small>
+  </div>
+  <div class="form-group">
+    <label>Name</label>
+    <input class="form-control" formControlName="patientName" readonly>
+  </div>
+  <div class="form-group">
+    <label for="treatments">Treatments</label>
+    <input class="form-control" formControlName="treatments" placeholder="Treatments">
+    <small class="form-text text-danger" *ngIf="form.controls.treatments.invalid && form.controls.treatments.touched">Treatments Required</small>
+  </div>
+  <div class="form-group">
+    <label for="comments">Comments</label>
+    <input class="form-control" formControlName="comments" placeholder="Comments">
+  </div>
+
+  <div class="form-group">
+    <label for="sessionFee">Session Fee</label>
+    <input class="form-control" type="number" formControlName="sessionFee" placeholder="Session Fee">
+    <small class="form-text text-danger" *ngIf="form.controls.sessionFee.invalid && form.controls.sessionFee.touched">Treatments Required</small>
+  </div>
+
+  <div class="row m-2 d-flex justify-content-between">
+    <a class="btn btn-secondary" routerLink="/dashboard/sessions/list">
+      <i class="fa fa-undo"></i>Back to list</a>
+    <button class="btn btn-primary" [ngClass]="{'disabled': form.invalid }" type="submit">
+      <i class="fa fa-send"></i>Save</button>
+  </div>
+</form>

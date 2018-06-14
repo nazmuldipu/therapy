@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Patient } from '../models/patient.model';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { map, tap, take } from 'rxjs/operators';
 import { OrderByDirection } from '@firebase/firestore-types';
-import { of } from 'rxjs';
-import { Action } from 'rxjs/internal/scheduler/Action';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { map, take } from 'rxjs/operators';
+
+import { Patient } from '../models/patient.model';
 
 @Injectable()
 export class PatientService {
@@ -18,11 +17,11 @@ export class PatientService {
   create(patient: Patient) {
     const value = {
       ...patient,
-      createdDate: new Date(),
-      updateDate: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
       companyId: this.companyId
     };
-    console.log(value);
+
     return this.afs.collection(this.serviceUrl).add({
       ...value
     });
@@ -46,7 +45,6 @@ export class PatientService {
   }
 
   get(pid: string) {
-    if (!pid) return of({});
     return this.afs
       .doc(this.serviceUrl + '/' + pid)
       .valueChanges()
@@ -61,7 +59,6 @@ export class PatientService {
 
   getPaginatedStartAfter(
     companyId,
-    orderBy,
     order: OrderByDirection = 'asc',
     limit,
     startAfter
@@ -70,15 +67,15 @@ export class PatientService {
       .collection(this.serviceUrl, ref =>
         ref
           .where('companyId', '==', companyId)
-          .orderBy(orderBy, order)
-          .orderBy('createdDate', order)
+          .orderBy('updatedAt', order)
           .limit(limit)
           .startAfter(startAfter)
       )
       .snapshotChanges()
       .pipe(
+        // take(1),
         map(actions => {
-          if (order === 'desc') {
+          if (order === 'asc') {
             actions.reverse();
           }
           return actions.map(a => {
@@ -94,7 +91,7 @@ export class PatientService {
     delete patient['id'];
     return this.afs.doc(this.serviceUrl + '/' + pid).update({
       ...patient,
-      updateDate: new Date()
+      updatedAt: new Date()
     });
   }
 

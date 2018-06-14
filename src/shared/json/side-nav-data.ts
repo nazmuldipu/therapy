@@ -7,32 +7,6 @@ export const SideNavbarData = [
     secondMeu: []
   },
   {
-    name: 'অ্যাডমিন',
-    icon: 'fa-user',
-    url: '',
-    authority: 'ADMIN',
-    secondMeu: [
-      {
-        name: 'ইউজার যোগ করুন',
-        icon: 'fa-plus',
-        url: '/dashboard/admin/users/add/add',
-        authority: 'ADMIN'
-      },
-      {
-        name: 'ইউজার তালিকা',
-        icon: 'fa-list',
-        url: '/dashboard/admin/users/list',
-        authority: 'ADMIN'
-      },
-      {
-        name: 'প্রমোশনগুলো',
-        icon: 'fa-list',
-        url: '/dashboard/admin/promos',
-        authority: 'ROLE_ADMIN'
-      }
-    ]
-  },
-  {
     name: 'রোগী',
     icon: 'fa-users',
     url: '',
@@ -61,19 +35,19 @@ export const SideNavbarData = [
       {
         name: 'নতুন সেশন যোগ করুন',
         icon: 'fa-plus',
-        url: '/dashboard/admin/users/add/add',
+        url: '/dashboard/sessions/new',
         authority: 'ADMIN'
       },
       {
         name: 'সেশন তালিকা',
         icon: 'fa-list',
-        url: '/dashboard/admin/users/list',
+        url: '/dashboard/sessions',
         authority: 'ADMIN'
       },
       {
         name: 'রোগীর সেশন',
         icon: 'fa-male',
-        url: '/dashboard/admin/users/list',
+        url: '/dashboard/sessions/by-patient',
         authority: 'ADMIN'
       }
     ]
@@ -107,6 +81,32 @@ export const SideNavbarData = [
         icon: 'fa-minus-square-o ',
         url: '/dashboard/admin/users/list',
         authority: 'ADMIN'
+      }
+    ]
+  },
+  {
+    name: 'অ্যাডমিন',
+    icon: 'fa-user',
+    url: '',
+    authority: 'ADMIN',
+    secondMeu: [
+      {
+        name: 'ইউজার যোগ করুন',
+        icon: 'fa-plus',
+        url: '/dashboard/admin/users/add/add',
+        authority: 'ADMIN'
+      },
+      {
+        name: 'ইউজার তালিকা',
+        icon: 'fa-list',
+        url: '/dashboard/admin/users/list',
+        authority: 'ADMIN'
+      },
+      {
+        name: 'প্রমোশনগুলো',
+        icon: 'fa-list',
+        url: '/dashboard/admin/promos',
+        authority: 'ROLE_ADMIN'
       }
     ]
   }
