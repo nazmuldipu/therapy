@@ -1,0 +1,53 @@
+<div class="container-fluid p-0">
+  <div class="row m-0 my-4">
+
+    <div class="col-12 col-md-6 pr-md-0">
+      <div class="patients">
+        <div class="patients__title d-flex justify-content-between">
+          <h3>
+            <img src="assets/svgs/patients.svg"> Patient List
+          </h3>
+          <a class="btn__add raised" routerLink="/dashboard/accounting/cashbook">
+            <i class="fa fa-list"></i>&nbsp; Cashbook
+          </a>
+        </div>
+
+        <div *ngIf="patients; else loading">
+          <div class="message" *ngIf="!patients.length">
+            <i class="fa fa-frown-o"></i>&nbsp; No patients added yet
+          </div>
+          <div *ngFor="let patient of patients">
+            <patient-list [patient]="patient" (edit)="onEdit($event)"></patient-list>
+          </div>
+          <paginate-reverse [firstVisibleDate]="firstVisibleDate" [lastVisibleDate]="lastVisibleDate" (paginate)="onPaginate($event)"></paginate-reverse>
+        </div>
+
+        <ng-template #loading>
+          <div class="message">
+            <i class="fa fa-refresh"></i>&nbsp; Patients loading...
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div class="patients">
+        <div class="patients__title d-flex justify-content-between">
+          <h3>
+            <img src="assets/svgs/money.svg"> Collect fee
+          </h3>
+          <a class="btn__add raised" [routerLink] (click)="clean()">
+            <i class="fa fa-window-close-o"></i>&nbsp; Clear
+          </a>
+        </div>
+        <div>
+          <fee-form [patient]="patient" (create)="onCreate($event)"></fee-form>
+          <!-- <session-form [patient]="patient" [lastSession]="patientLastSession" (create)="onCreate($event)"></session-form> -->
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

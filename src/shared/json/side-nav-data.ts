@@ -61,7 +61,7 @@ export const SideNavbarData = [
       {
         name: 'সেশন ফি সংগ্রহ',
         icon: 'fa-credit-card',
-        url: '/dashboard/admin/users/add/add',
+        url: '/dashboard/accounting/collect-fee',
         authority: 'ADMIN'
       },
       {

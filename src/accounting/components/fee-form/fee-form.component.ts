@@ -49,10 +49,6 @@ export class FeeFormComponent implements OnChanges {
 
   save() {
     if (this.form.valid) {
-      // this.form.controls.balance.setValue(
-      //   this.patient.balance - +this.form.controls.credit.value
-      // );
-
       //modify and update date value
       let dumy = new Date(this.form.controls.date.value);
       const date = new Date();
@@ -62,8 +58,6 @@ export class FeeFormComponent implements OnChanges {
 
       const balance: number =
         this.patient.balance - +this.form.controls.credit.value;
-      // const { seconds, nanoseconds }: any = this.lastSession.date;
-      // const newSeconds = Math.round(date.getTime() / 1000);
       this.form.patchValue({ date: date, balance: balance });
       this.create.emit(this.form.value);
       this.form.reset();
