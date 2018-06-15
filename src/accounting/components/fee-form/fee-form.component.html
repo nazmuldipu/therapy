@@ -1,0 +1,31 @@
+<form class="p-3" [formGroup]="form" (ngSubmit)="save()" novalidate>
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input class="form-control" type="date" id="date" formControlName="date">
+    <small class="form-text text-danger" *ngIf="form.controls.date.invalid && form.controls.date.touched">Date Required.</small>
+  </div>
+
+  <div class="form-group">
+    <label>Name</label>
+    <label class="form-control">{{patient?.basic?.name}} &nbsp;</label>
+  </div>
+
+  <div class="form-group">
+    <label for="explanation">Explanation</label>
+    <input class="form-control" id="explanation" formControlName="explanation" placeholder="Explanation">
+    <small class="form-text text-danger" *ngIf="form.controls.explanation.invalid && form.controls.explanation.touched">Explanation Required</small>
+  </div>
+
+  <div class="form-group">
+    <label for="credit">Amount</label>
+    <input class="form-control" type="number" id="credit" formControlName="credit" placeholder="Amount">
+    <small class="form-text text-danger" *ngIf="form.controls.credit.invalid && form.controls.credit.touched">Amount Required</small>
+  </div>
+
+  <div class="row m-2 d-flex justify-content-between">
+    <a class="btn btn-secondary" routerLink="/dashboard/sessions/list">
+      <i class="fa fa-undo"></i>Back to list</a>
+    <button class="btn btn-primary" [ngClass]="{'disabled': form.invalid }" type="submit">
+      <i class="fa fa-send"></i>Save</button>
+  </div>
+</form>
