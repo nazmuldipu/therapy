@@ -67,46 +67,20 @@ export const SideNavbarData = [
       {
         name: 'নগদান বই',
         icon: 'fa-money',
-        url: '/dashboard/admin/users/list',
+        url: '/dashboard/accounting/cashbook',
         authority: 'ADMIN'
       },
       {
         name: 'আয় যোগ করুন',
         icon: 'fa-plus-square-o',
-        url: '/dashboard/admin/users/list',
+        url: '/dashboard/accounting/income',
         authority: 'ADMIN'
       },
       {
         name: 'ব্যয় যোগ করুন',
         icon: 'fa-minus-square-o ',
-        url: '/dashboard/admin/users/list',
+        url: '/dashboard/accounting/expense',
         authority: 'ADMIN'
-      }
-    ]
-  },
-  {
-    name: 'অ্যাডমিন',
-    icon: 'fa-user',
-    url: '',
-    authority: 'ADMIN',
-    secondMeu: [
-      {
-        name: 'ইউজার যোগ করুন',
-        icon: 'fa-plus',
-        url: '/dashboard/admin/users/add/add',
-        authority: 'ADMIN'
-      },
-      {
-        name: 'ইউজার তালিকা',
-        icon: 'fa-list',
-        url: '/dashboard/admin/users/list',
-        authority: 'ADMIN'
-      },
-      {
-        name: 'প্রমোশনগুলো',
-        icon: 'fa-list',
-        url: '/dashboard/admin/promos',
-        authority: 'ROLE_ADMIN'
       }
     ]
   }

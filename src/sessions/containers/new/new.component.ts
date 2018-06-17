@@ -16,8 +16,6 @@ export class NewComponent implements OnInit {
   patient: Patient;
   patients: Patient[];
   patientLastSession: PSession;
-  firstVisibleDate;
-  lastVisibleDate;
   limit = 5;
 
   constructor(
@@ -43,12 +41,9 @@ export class NewComponent implements OnInit {
     await this.patientService
       .getPaginatedStartAfter(companyId, order, limit, startAfter)
       .subscribe(data => {
-        this.patients = data;
-
-        this.firstVisibleDate = this.patients[0].updatedAt;
-        this.lastVisibleDate = this.patients[
-          this.patients.length - 1
-        ].updatedAt;
+        if (data.length) {
+          this.patients = data;
+        }
       });
   }
 

@@ -61,11 +61,12 @@ export class CashBookService {
       .collection(this.serviceUrl, ref =>
         ref
           .where('companyId', '==', companyId)
-          .orderBy('createdDate', 'desc')
+          .orderBy('createdAt', 'desc')
           .limit(1)
       )
       .snapshotChanges()
       .pipe(
+        take(1),
         map(actions =>
           actions.map(a => {
             const data = a.payload.doc.data() as Cashbook;
@@ -78,7 +79,6 @@ export class CashBookService {
 
   getPaginatedStartAfter(
     companyId,
-    orderBy,
     order: OrderByDirection = 'asc',
     limit,
     startAfter
@@ -87,20 +87,23 @@ export class CashBookService {
       .collection(this.serviceUrl, ref =>
         ref
           .where('companyId', '==', companyId)
-          .orderBy(orderBy, order)
-          .orderBy('createdDate', order)
+          .orderBy('createdAt', order)
           .limit(limit)
           .startAfter(startAfter)
       )
       .snapshotChanges()
       .pipe(
-        map(actions =>
-          actions.map(a => {
+        take(2),
+        map(actions => {
+          if (order === 'desc') {
+            actions.reverse();
+          }
+          return actions.map(a => {
             const data = a.payload.doc.data() as Cashbook;
             const id = a.payload.doc.id;
             return { id, ...data };
-          })
-        )
+          });
+        })
       );
   }
 

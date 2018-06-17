@@ -95,7 +95,7 @@ export class SessionService {
       )
       .snapshotChanges()
       .pipe(
-        take(1),
+        take(2),
         map(actions => {
           return actions.map(a => {
             const data = a.payload.doc.data() as PSession;

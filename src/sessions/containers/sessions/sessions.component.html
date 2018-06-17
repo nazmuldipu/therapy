@@ -23,7 +23,8 @@
                 <div *ngFor="let session of psessions">
                   <session-item [psession]="session" (edit)="onEdit($event)"></session-item>
                 </div>
-                <paginate-reverse [firstVisibleDate]="firstVisibleDate" [lastVisibleDate]="lastVisibleDate" (paginate)="onPaginate($event)"></paginate-reverse>
+                <paginate-reverse [firstVisibleDate]="psessions[0].updatedAt" [lastVisibleDate]="psessions[psessions.length-1].updatedAt"
+                  (paginate)="onPaginate($event)"></paginate-reverse>
               </div>
 
               <ng-template #loading>

@@ -28,7 +28,9 @@ export class SessionsComponent implements OnInit {
     await this.sessionService
       .getPaginatedStartAfter(companyId, order, limit, startAfter)
       .subscribe(data => {
-        this.psessions = data;
+        if (data.length) {
+          this.psessions = data;
+        }
       });
   }
   onEdit(id: string) {

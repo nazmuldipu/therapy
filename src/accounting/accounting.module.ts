@@ -7,6 +7,9 @@ import { ExpenseComponent } from './containers/expense/expense.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { FeeFormComponent } from './components/fee-form/fee-form.component';
+import { CashbookItemComponent } from './components/cashbook-item/cashbook-item.component';
+import { ExpenseFormComponent } from './components/expense-form/expense-form.component';
+import { IncomeFormComponent } from './components/income-form/income-form.component';
 
 // routes
 export const ROUTES: Routes = [
@@ -35,7 +38,10 @@ export const ROUTES: Routes = [
     CashbookComponent,
     IncomeComponent,
     ExpenseComponent,
-    FeeFormComponent
+    FeeFormComponent,
+    CashbookItemComponent,
+    ExpenseFormComponent,
+    IncomeFormComponent
   ]
 })
 export class AccountingModule {}

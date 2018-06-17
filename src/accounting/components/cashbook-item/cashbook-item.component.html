@@ -1,0 +1,9 @@
+<div class="list-item">
+  <a [routerLink]>
+    <p class="list-item__name">{{cashbook?.explanation}}</p>
+    <p class="list-item__details"> Date: {{ cashbook?.date.seconds * 1000 | date:'dd-MM-yyyy'}} | debit: {{ cashbook?.debit }} | Credit: {{ cashbook?.credit}}
+      | Balance:
+      <strong style="color: black;">{{ cashbook?.balance}}</strong>
+    </p>
+  </a>
+</div>

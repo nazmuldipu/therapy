@@ -6,6 +6,7 @@ import { CashBookService } from 'src/shared/services/cashbook.service';
 import { take } from 'rxjs/operators';
 import { PatientLedger } from '../../../shared/models/patient-ledger.model';
 import { Cashbook } from '../../../shared/models/cashbook.model';
+import { Timestamp } from '@firebase/firestore-types';
 
 @Component({
   selector: 'app-collect-fee',
@@ -84,11 +85,18 @@ export class CollectFeeComponent implements OnInit {
     this.patient.balance = event.balance;
     const cashbook = this.createCashbookFromPatientLedger(event);
 
+    const lastCashBookSeconds = this.getSecondsFromTimestamp(
+      this.lastCashBook.date
+    );
+    const lastLedgerSeconds = this.getSecondsFromTimestamp(
+      this.lastLedger.date
+    );
+
     if (
       this.lastLedger &&
       this.lastCashBook &&
-      (this.lastLedger.date.getTime() > event.date.getTime() ||
-        this.lastCashBook.date.getTime() > event.date.getTime())
+      (lastLedgerSeconds > event.date.getTime() ||
+        lastCashBookSeconds > event.date.getTime())
     ) {
       console.log(
         'Date error!! your selected date is earlier than patient last ledger or last cashbook entry'
@@ -106,7 +114,7 @@ export class CollectFeeComponent implements OnInit {
       (this.lastCashBook == undefined ? 0 : +this.lastCashBook.balance) +
       +pledger.credit -
       +pledger.debit;
-    // let cashBook = new Cashbook('', null, this.companyId, event.date, event.explanation, null, event.credit, event.debit, cashBalance);
+    console.log(this.lastCashBook.balance, pledger.credit, pledger.debit);
     const value = {
       date: pledger.date,
       explanation: pledger.explanation,
@@ -114,6 +122,14 @@ export class CollectFeeComponent implements OnInit {
       credit: pledger.debit,
       balance: cashBalance
     } as Cashbook;
+    console.log(value);
+    console.log(this.lastLedger.date);
     return value;
+  }
+
+  //convert seconds from timestamp
+  getSecondsFromTimestamp(date: Date) {
+    const { seconds, nanoseconds }: any = date;
+    return seconds;
   }
 }

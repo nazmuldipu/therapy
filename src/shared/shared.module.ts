@@ -14,6 +14,7 @@ import { CashBookService } from './services/cashbook.service';
 import { NavbarService } from './services/navbar.service';
 import { PatientLedgerService } from './services/patient-ledger.service';
 import { PatientService } from './services/patient.service';
+import { PaginateComponent } from './components/paginate/paginate.component';
 
 @NgModule({
   imports: [
@@ -33,11 +34,16 @@ import { PatientService } from './services/patient.service';
     PatientLedgerService,
     CashBookService
   ],
-  declarations: [PatientListComponent, PaginateReverseComponent],
+  declarations: [
+    PatientListComponent,
+    PaginateReverseComponent,
+    PaginateComponent
+  ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
     PatientListComponent,
+    PaginateComponent,
     PaginateReverseComponent,
     AngularFireAuthModule,
     NgbModule.forRoot().ngModule

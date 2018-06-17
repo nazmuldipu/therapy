@@ -3,7 +3,7 @@ import { PatientService } from '../../../shared/services/patient.service';
 import { Subscription } from 'rxjs';
 import { Patient } from '../../../shared/models/patient.model';
 import { Router } from '@angular/router';
-
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-patients',
   templateUrl: './patients.component.html',
@@ -29,6 +29,7 @@ export class PatientsComponent implements OnInit {
   async onPaginate({ companyId, order, limit, startAfter }: any) {
     await this.patientService
       .getPaginatedStartAfter(companyId, order, limit, startAfter)
+      .pipe(take(2))
       .subscribe(data => {
         this.patients = data;
       });
