@@ -75,4 +75,9 @@ export class SideNavbarComponent implements OnInit {
   navigateTo(url: string) {
     this.router.navigate([url]);
   }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 }
