@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SessionFormComponent } from './components/session-form/session-form.component';
 import { NewComponent } from './containers/new/new.component';
 import { SessionsComponent } from './containers/sessions/sessions.component';
-import { SessionItemComponent } from './components/session-item/session-item.component';
+// import { SessionItemComponent } from '../shared/components/session-item/session-item.component';
 import { ByPatientComponent } from './containers/by-patient/by-patient.component';
 
 // routes
@@ -35,7 +35,7 @@ export const ROUTES: Routes = [
     SessionsComponent,
     NewComponent,
     SessionFormComponent,
-    SessionItemComponent,
+    // SessionItemComponent,
     ByPatientComponent
   ]
 })

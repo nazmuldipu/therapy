@@ -56,9 +56,9 @@
 
                             </div>
                             <div class="row ">
-                                <button class="btn btn-primary mx-1 ">প্রেসক্রিপশন</button>
-                                <button class="btn btn-secondary mx-1 ">সেশনগুলো</button>
-                                <button class="btn btn-secondary mx-1 ">খতিয়ান</button>
+                                <button class="btn btn-primary mx-1 " (click)="onButton(1)">প্রেসক্রিপশন</button>
+                                <button class="btn btn-secondary mx-1 " (click)="onButton(2)">সেশনগুলো</button>
+                                <button class="btn btn-secondary mx-1 " (click)="onButton(3)">খতিয়ান</button>
                                 <a class="btn btn-light mx-1" [routerLink]="['/dashboard/patients']">রোগীর তালিকা </a>
                             </div>
                         </div>
@@ -71,4 +71,4 @@
     </div>
 </div>
 
-{{patient | json}}
+<!-- {{patient | json}} -->

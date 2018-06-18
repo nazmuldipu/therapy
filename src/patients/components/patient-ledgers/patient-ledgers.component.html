@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row m-0">
+    <div class="col-12 col-md-6 patients">
+      <div class="patients__title d-flex justify-content-between">
+        <h3>
+          <img src="assets/svgs/patients.svg"> Patient Ledgers
+        </h3>
+        <a class="btn__add raised" [routerLink]>
+          <i class="fa fa-calculator"></i>&nbsp; Total : {{ pledgers?.length }}
+        </a>
+      </div>
+
+      <div *ngIf="pledgers; else loading">
+        <div class="message" *ngIf="!pledgers.length">
+          <i class="fa fa-frown-o"></i>&nbsp; No Ledger added yet
+        </div>
+        <div *ngFor="let pledger of pledgers">
+          <div class="list-item">
+            <a [routerLink]>
+              <p class="list-item__name">{{pledger?.explanation}}</p>
+              <p class="list-item__details"> Date: {{ pledger?.date.seconds * 1000 | date:'dd-MM-yyyy'}} | debit: {{ pledger?.debit }} | Credit: {{ pledger?.credit}}
+                | Balance:
+                <strong style="color: black;">{{ pledger?.balance}}</strong>
+              </p>
+            </a>
+          </div>
+        </div>
+        <paginate [firstVisibleDate]="pledgers[0].updatedAt" [lastVisibleDate]="pledgers[pledgers.length-1].updatedAt" (paginate)="onPaginate($event)"></paginate>
+      </div>
+
+      <ng-template #loading>
+        <div class="message">
+          <i class="fa fa-refresh"></i>&nbsp; Ledger loading...
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>

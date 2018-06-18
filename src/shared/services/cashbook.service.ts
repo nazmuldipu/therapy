@@ -107,7 +107,7 @@ export class CashBookService {
       );
   }
 
-  getCashbookForDateBetween(
+  getDateBetween(
     companyId,
     orderBy,
     order: OrderByDirection = 'asc',

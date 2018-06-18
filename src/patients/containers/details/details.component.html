@@ -1,2 +1,15 @@
-<patient-details [patient]="patient">
+<patient-details [patient]="patient" (operation)="onOperation($event)">
 </patient-details>
+
+<div class="container-fluid" *ngIf="infoType == 1">
+    <div class="row">
+        <div class="col-12">
+            presciption
+        </div>
+    </div>
+</div>
+
+
+<patient-sessions *ngIf="infoType == 2" [psessions]="psessions" (paginate)="onSessionPaginate($event)"></patient-sessions>
+
+<patient-ledgers *ngIf="infoType == 3" [pledgers]="pledgers" (paginate)="onLedgerPaginate($event)"></patient-ledgers>

@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class ByPatientComponent implements OnInit, OnDestroy {
   companyId;
+  patientId;
   patients: Patient[];
 
   sessions: PSession[];
@@ -53,16 +54,36 @@ export class ByPatientComponent implements OnInit, OnDestroy {
 
   async onEdit(event) {
     this.sessions = [];
-    await this.sessionService.getSessionByPatientId(event).subscribe(data => {
-      this.sessions = data;
-    });
-
-    this.onPaginate({
-      companyId: this.companyId,
-      orderBy: '',
+    this.patientId = event;
+    const jbo = {
+      patientId: event,
       order: 'desc',
       limit: 5,
       startAfter: new Date()
-    });
+    };
+    this.onSessionPaginate(jbo);
+  }
+
+  onSPaginate({ order, limit, startAfter }) {
+    console.log(order, limit, startAfter);
+    const value = {
+      patientId: this.patientId,
+      order,
+      limit,
+      startAfter
+    };
+    console.log(value);
+    this.onSessionPaginate(value);
+  }
+
+  async onSessionPaginate({ patientId, order, limit, startAfter }: any) {
+    console.log(patientId, order, limit, startAfter);
+    this.sessionService
+      .getSessionByPatientId(patientId, order, limit, startAfter)
+      .subscribe(data => {
+        if (data.length) {
+          this.sessions = data;
+        }
+      });
   }
 }

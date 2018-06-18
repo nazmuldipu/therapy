@@ -87,6 +87,33 @@ export class PatientService {
       );
   }
 
+  getDateBetween(
+    companyId,
+    orderBy,
+    order: OrderByDirection = 'asc',
+    startAt,
+    endAt
+  ) {
+    return this.afs
+      .collection(this.serviceUrl, ref =>
+        ref
+          .where('companyId', '==', companyId)
+          .orderBy(orderBy, order)
+          .startAt(startAt)
+          .endAt(endAt)
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data() as Patient;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
+  }
+
   update(pid, patient: Patient) {
     delete patient['id'];
     return this.afs.doc(this.serviceUrl + '/' + pid).update({

@@ -2,7 +2,9 @@ import {
   Component,
   OnInit,
   Input,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { Patient } from '../../../shared/models/patient.model';
 
@@ -15,5 +17,11 @@ import { Patient } from '../../../shared/models/patient.model';
 export class PatientDetailsComponent {
   @Input() patient: Patient;
 
+  @Output() operation= new EventEmitter<number>();
+
   constructor() {}
+
+  onButton(event:number) {
+    this.operation.emit(event);
+  }
 }

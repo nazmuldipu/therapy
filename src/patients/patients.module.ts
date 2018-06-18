@@ -13,6 +13,8 @@ import { PatientTreatmentsFormComponent } from './components/patient-treatments-
 import { DetailsComponent } from './containers/details/details.component';
 import { NewComponent } from './containers/new/new.component';
 import { PatientsComponent } from './containers/patients/patients.component';
+import { PatientSessionsComponent } from './components/patient-sessions/patient-sessions.component';
+import { PatientLedgersComponent } from './components/patient-ledgers/patient-ledgers.component';
 
 // routes
 export const ROUTES: Routes = [
@@ -51,7 +53,9 @@ export const ROUTES: Routes = [
     PatientFeeFormComponent,
     PatientItemComponent,
     DetailsComponent,
-    PatientDetailsComponent
+    PatientDetailsComponent,
+    PatientSessionsComponent,
+    PatientLedgersComponent
   ]
 })
 export class PatientsModule {}

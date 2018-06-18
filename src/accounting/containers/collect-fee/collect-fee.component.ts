@@ -122,8 +122,6 @@ export class CollectFeeComponent implements OnInit {
       credit: pledger.debit,
       balance: cashBalance
     } as Cashbook;
-    console.log(value);
-    console.log(this.lastLedger.date);
     return value;
   }
 

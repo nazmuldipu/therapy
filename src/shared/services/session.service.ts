@@ -88,21 +88,60 @@ export class SessionService {
       );
   }
 
-  getSessionByPatientId(patientId) {
+  getSessionByPatientId(
+    patientId,
+    order: OrderByDirection = 'asc',
+    limit,
+    startAfter
+  ) {
     return this.afs
       .collection(this.serviceUrl, ref =>
-        ref.where('patientId', '==', patientId).orderBy('createdAt', 'asc')
+        ref
+          .where('patientId', '==', patientId)
+          .orderBy('createdAt', order)
+          .limit(limit)
+          .startAfter(startAfter)
       )
       .snapshotChanges()
       .pipe(
         take(2),
         map(actions => {
+          if (order === 'asc') {
+            actions.reverse();
+          }
           return actions.map(a => {
             const data = a.payload.doc.data() as PSession;
             const id = a.payload.doc.id;
             return { id, ...data };
           });
         })
+      );
+  }
+
+  getDateBetween(
+    companyId,
+    orderBy,
+    order: OrderByDirection = 'asc',
+    startAt,
+    endAt
+  ) {
+    return this.afs
+      .collection(this.serviceUrl, ref =>
+        ref
+          .where('companyId', '==', companyId)
+          .orderBy(orderBy, order)
+          .startAt(startAt)
+          .endAt(endAt)
+      )
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data() as PSession;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
       );
   }
 

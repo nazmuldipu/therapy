@@ -56,20 +56,33 @@ export class PatientLedgerService {
       );
   }
 
-  getPatientLedgerByPatientId(patientId) {
+  getPatientLedgerByPatientId(
+    patientId,
+    order: OrderByDirection = 'asc',
+    limit,
+    startAfter
+  ) {
     return this.afs
       .collection(this.serviceUrl, ref =>
-        ref.where('patientId', '==', patientId).orderBy('date')
+        ref
+          .where('patientId', '==', patientId)
+          .orderBy('createdAt', order)
+          .limit(limit)
+          .startAfter(startAfter)
       )
       .snapshotChanges()
       .pipe(
-        map(actions =>
-          actions.map(a => {
+        take(2),
+        map(actions => {
+          if (order === 'desc') {
+            actions.reverse();
+          }
+          return actions.map(a => {
             const data = a.payload.doc.data() as PatientLedger;
             const id = a.payload.doc.id;
             return { id, ...data };
-          })
-        )
+          });
+        })
       );
   }
 
