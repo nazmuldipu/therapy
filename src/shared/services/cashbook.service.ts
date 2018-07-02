@@ -33,9 +33,10 @@ export class CashBookService {
       )
       .snapshotChanges()
       .pipe(
+        take(1),
         map(actions =>
           actions.map(a => {
-            const data = a.payload.doc.data() as Cashbook;
+            const data = a.payload.doc.data();
             const id = a.payload.doc.id;
             return { id, ...data };
           })

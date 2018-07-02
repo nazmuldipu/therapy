@@ -6,6 +6,7 @@ import { SideNavbarComponent } from './side-navbar/side-navbar.component';
 import { DashNavbarComponent } from './dash-navbar/dash-navbar.component';
 import { DashboardComponent } from './dashboard.components';
 import { SharedModule } from '../shared/shared.module';
+import { DatabaseMigrationComponent } from './database-migration/database-migration.component';
 
 // routes
 export const ROUTES: Routes = [
@@ -14,6 +15,7 @@ export const ROUTES: Routes = [
     component: DashboardComponent,
     children: [
       { path: '', component: IndexComponent },
+      { path: 'migration', component: DatabaseMigrationComponent },
       {
         path: 'patients',
         loadChildren: '../patients/patients.module#PatientsModule'
@@ -36,7 +38,8 @@ export const ROUTES: Routes = [
     DashboardComponent,
     IndexComponent,
     SideNavbarComponent,
-    DashNavbarComponent
+    DashNavbarComponent,
+    DatabaseMigrationComponent
   ]
 })
 export class DashboardModule {}

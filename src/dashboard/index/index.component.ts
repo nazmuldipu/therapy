@@ -5,6 +5,7 @@ import { CommonService } from '../../shared/services/common.service';
 import { SessionService } from '../../shared/services/session.service';
 import { take } from 'rxjs/internal/operators/take';
 import { PatientService } from '../../shared/services/patient.service';
+import { CashReport } from '../../shared/models/cash-report.model';
 
 @Component({
   selector: 'app-index',
@@ -13,6 +14,7 @@ import { PatientService } from '../../shared/services/patient.service';
 })
 export class IndexComponent implements OnInit {
   companyId;
+  cashReport: CashReport;
   cash: number = 0;
   currentMonthPatients: number = 0;
   currentMonthSessions: number = 0;
@@ -71,7 +73,57 @@ export class IndexComponent implements OnInit {
       .subscribe(data => {
         data.forEach(cas => {
           this.cash = cas.balance;
+          this.cashReport = { ...this.cashReport, balance: cas.balance };
+          // this.cashReport.balance = cas.balance;
         });
+      });
+
+    // get this month cash report
+    await this.cashbookService
+      .getDateBetween(
+        this.companyId,
+        'createdAt',
+        'asc',
+        this.commonService.getCurrentMonthFirstDay(),
+        this.commonService.getCurrentMonthLastDay()
+      )
+      .pipe(take(1))
+      .subscribe(data => {
+        let debit = 0;
+        let credit = 0;
+        data.forEach((c: Cashbook) => {
+          debit += c.debit;
+          credit += c.credit;
+        });
+        this.cashReport = {
+          ...this.cashReport,
+          thisMonthIncome: debit,
+          thisMonthExpense: credit
+        };
+      });
+
+    // get last month cash report
+    await this.cashbookService
+      .getDateBetween(
+        this.companyId,
+        'createdAt',
+        'asc',
+        this.commonService.getLastMonthFirstDay(),
+        this.commonService.getLastMonthLastDay()
+      )
+      .pipe(take(1))
+      .subscribe(data => {
+        let debit = 0;
+        let credit = 0;
+        data.forEach((c: Cashbook) => {
+          debit += c.debit;
+          credit += c.credit;
+        });
+        this.cashReport = {
+          ...this.cashReport,
+          lastMonthIncome: debit,
+          lastMonthExpense: credit
+        };
       });
   }
 }

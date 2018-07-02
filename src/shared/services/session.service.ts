@@ -35,6 +35,7 @@ export class SessionService {
       )
       .snapshotChanges()
       .pipe(
+        take(1),
         map(actions =>
           actions.map(a => {
             const data = a.payload.doc.data() as PSession;
@@ -64,6 +65,7 @@ export class SessionService {
     limit,
     startAfter
   ) {
+    console.log(companyId, order, limit, startAfter);
     return this.afs
       .collection(this.serviceUrl, ref =>
         ref
@@ -79,6 +81,7 @@ export class SessionService {
           if (order === 'asc') {
             actions.reverse();
           }
+          console.log(actions);
           return actions.map(a => {
             const data = a.payload.doc.data() as PSession;
             const id = a.payload.doc.id;

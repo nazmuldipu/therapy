@@ -31,7 +31,37 @@
         </div>
         <div class="content">
           <div class="text">CASH</div>
-          <div class="number">{{ cash }} ৳</div>
+          <div class="number">{{ cashReport?.balance }} ৳</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="card">
+        <div class="body bg-teal">
+          <div class="m-3">
+            <h5>আয় ব্যয় তথ্য</h5>
+          </div>
+          <table class="table cash-table">
+            <tr>
+              <td></td>
+              <td>আয়</td>
+              <td>ব্যয়</td>
+            </tr>
+            <tr>
+              <td>চলতি মাস</td>
+              <td>{{ cashReport?.thisMonthIncome | currency:"&#x9f3;"}}</td>
+              <td>{{ cashReport?.thisMonthExpense | currency:"&#x9f3;"}}</td>
+            </tr>
+            <tr>
+              <td>বিগত মাস</td>
+              <td>{{ cashReport?.lastMonthIncome | currency:"&#x9f3;"}}</td>
+              <td>{{ cashReport?.lastMonthExpense | currency:"&#x9f3;" }}</td>
+            </tr>
+          </table>
+
         </div>
       </div>
     </div>

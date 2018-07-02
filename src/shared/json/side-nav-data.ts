@@ -7,6 +7,13 @@ export const SideNavbarData = [
     secondMeu: []
   },
   {
+    name: 'ডাটা মাইগ্রেশন',
+    icon: 'fa-home',
+    url: '/dashboard/migration',
+    authority: '',
+    secondMeu: []
+  },
+  {
     name: 'রোগী',
     icon: 'fa-users',
     url: '',

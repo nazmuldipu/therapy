@@ -29,10 +29,11 @@ export class PatientLedgerService {
   getAll(companyId) {
     return this.afs
       .collection(this.serviceUrl, ref =>
-        ref.where('companyId', '==', companyId).orderBy('updatedAt')
+        ref.where('companyId', '==', companyId)
       )
       .snapshotChanges()
       .pipe(
+        take(1),
         map(actions =>
           actions.map(a => {
             const data = a.payload.doc.data() as PatientLedger;

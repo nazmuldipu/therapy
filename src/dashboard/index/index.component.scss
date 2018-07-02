@@ -51,6 +51,14 @@
   transition: all 0.95s;
 }
 
+.cash-table {
+  & tr {
+    & td {
+      text-align: right;
+    }
+  }
+}
+
 .info-box.hover-expand-effect:hover:after {
   width: 100%;
 }
