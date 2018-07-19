@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { Router } from '@angular/router';
-import { NavbarService } from 'src/shared/services/navbar.service';
-import { AuthService } from 'src/shared/services/auth.service';
+import { of } from 'rxjs/internal/observable/of';
+import { take } from 'rxjs/internal/operators/take';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { map, switchMap } from 'rxjs/operators';
 import { SideNavbarData } from 'src/shared/json/side-nav-data';
 import { User } from 'src/shared/models/users.model';
-import { map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs/internal/observable/of';
+import { AuthService } from 'src/shared/services/auth.service';
+import { NavbarService } from 'src/shared/services/navbar.service';
 
 @Component({
   selector: 'side-navbar',
@@ -15,10 +16,12 @@ import { of } from 'rxjs/internal/observable/of';
 })
 export class SideNavbarComponent implements OnInit {
   // navCollaps: boolean;
-  webTitle: String;
   menuList: any;
-  selected: any;
+  selected: any = 'Dashboard';
+  navUrl: any;
   roles: string[] = [];
+
+  webTitle: String;
   appUser: User;
   subscription: Subscription;
 
@@ -29,11 +32,15 @@ export class SideNavbarComponent implements OnInit {
   ) {
     this.menuList = SideNavbarData;
   }
-
   async ngOnInit() {
-    this.subscription = await this.auth
+    this.getRoles();
+  }
+
+  async getRoles() {
+    await this.auth
       .getUser$()
       .pipe(
+        take(1),
         map(user => user),
         switchMap(user => {
           if (user !== null && user !== undefined) {
@@ -51,29 +58,30 @@ export class SideNavbarComponent implements OnInit {
       });
   }
 
-  hasAuthority(authority: string): boolean {
-    if (authority == '' || authority == null) return true;
-    return this.roles.includes(authority);
-  }
-
   get navCollaps() {
     return this.sideNav.getSideNavBarCollapse();
   }
 
-  navbarTrigger() {
-    this.sideNav.collapseNavber();
-  }
-
   select(smenu) {
-    this.selected = smenu == this.selected ? null : smenu;
+    this.selected = smenu;
   }
 
   isActive(smenu) {
     return this.selected === smenu;
   }
 
+  minimize(smenu) {
+    this.selected = smenu == this.selected ? null : smenu;
+  }
+
   navigateTo(url: string) {
+    this.navUrl = url;
     this.router.navigate([url]);
+  }
+
+  hasAuthority(authority: string): boolean {
+    if (authority == '' || authority == null) return true;
+    return this.roles.includes(authority);
   }
 
   logout() {

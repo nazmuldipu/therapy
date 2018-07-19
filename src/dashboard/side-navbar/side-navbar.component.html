@@ -25,27 +25,31 @@
       </div>
     </div>
 
-    <ul class="list-group mt-3">
-      <span *ngFor="let n of menuList">
-        <li (click)="select(n.name);" [ngClass]="{active: isActive(n.name)}" class="nav-group-item" *ngIf="hasAuthority(n.authority)"
-          (click)="n.url.length > 0 ? navigateTo(n.url) : null ">
-          <i class="fa" [ngClass]="n.icon"></i> &nbsp;
-          <span>{{n.name}}</span>
-          <small *ngIf="n.secondMeu.length > 0" class="pull-right">
-            <i class="fa" [ngClass]="isActive(n.name)?'fa-minus':'fa-plus'"></i>
-          </small>
+    <ul class="list-group">
+      <span *ngFor="let menu of menuList">
+        <li class="nav-group-item" [ngClass]="{active: isActive(menu.name)}" *ngIf="hasAuthority(menu.authority)" (click)="menu.url.length > 0 ? navigateTo(menu.url) : null;">
 
-          <span *ngFor="let child of n.secondMeu">
-            <ul style="display:none;" class="row p-0 second-list-group">
-              <li *ngIf="hasAuthority(child.authority)" (click)="child.url.length > 0 ? navigateTo(child.url) : null " class="nav-group-item first pl-5">
+          <div class="row">
+            <div class="col" (click)="select(menu.name)">
+              <i class="fa" [ngClass]="menu.icon"></i> {{menu.name}}
+            </div>
+            <small class="pull-right px-2" *ngIf="menu.secondMeu.length > 0">
+              <i class="fa" [ngClass]="isActive(menu.name)?'fa-minus':'fa-plus'" (click)="minimize(menu.name)"></i>
+            </small>
+          </div>
+
+          <ul class="list-group">
+            <span *ngFor="let child of menu.secondMeu">
+              <li style="display:none;" *ngIf="hasAuthority(child.authority)" (click)="child.url.length > 0 ? navigateTo(child.url) : null "
+                class="nav-group-item first pl-3" [ngClass]="{selected: child.url == navUrl}">
                 <i class="fa" [ngClass]="child.icon"></i>&nbsp;
-                <span>{{ child.name }}</span>
+                <span>{{ child.name }} </span>
               </li>
-            </ul>
-          </span>
+            </span>
+          </ul>
+
         </li>
       </span>
-
     </ul>
   </div>
 </nav>

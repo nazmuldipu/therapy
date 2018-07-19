@@ -51,6 +51,16 @@
               <td>ব্যয়</td>
             </tr>
             <tr>
+              <td>আজ</td>
+              <td>{{ cashReport?.todayIncome | currency:"&#x9f3;"}}</td>
+              <td>{{ cashReport?.todayExpense | currency:"&#x9f3;"}}</td>
+            </tr>
+            <tr>
+              <td>গতকাল</td>
+              <td>{{ cashReport?.yesterdayIncome | currency:"&#x9f3;"}}</td>
+              <td>{{ cashReport?.yesterdayExpense | currency:"&#x9f3;"}}</td>
+            </tr>
+            <tr>
               <td>চলতি মাস</td>
               <td>{{ cashReport?.thisMonthIncome | currency:"&#x9f3;"}}</td>
               <td>{{ cashReport?.thisMonthExpense | currency:"&#x9f3;"}}</td>

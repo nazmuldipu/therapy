@@ -21,6 +21,8 @@ export class CollectFeeComponent implements OnInit {
   lastVisibleDate;
   lastCashBook: Cashbook;
   lastLedger: PatientLedger;
+  showForm = false;
+  saving = false;
   limit = 5;
 
   constructor(
@@ -77,11 +79,14 @@ export class CollectFeeComponent implements OnInit {
       .subscribe(actions => {
         actions.forEach(action => {
           this.lastLedger = action as PatientLedger;
+          this.showForm = true;
         });
       });
   }
 
   async onCreate(event: PatientLedger) {
+    this.saving = true;
+    //Cashbook entry
     this.patient.balance = event.balance;
     const cashbook = this.createCashbookFromPatientLedger(event);
 
@@ -104,7 +109,10 @@ export class CollectFeeComponent implements OnInit {
     } else {
       await this.patientLedgerService.create(event);
       await this.patientService.update(this.patient.id, this.patient);
-      await this.cashBookServic.create(cashbook);
+      await this.cashBookServic.create(cashbook).then(ref => {
+        this.showForm = false;
+        this.saving = false;
+      });
       this.patient = null;
     }
   }
@@ -114,7 +122,6 @@ export class CollectFeeComponent implements OnInit {
       (this.lastCashBook == undefined ? 0 : +this.lastCashBook.balance) +
       +pledger.credit -
       +pledger.debit;
-    console.log(this.lastCashBook.balance, pledger.credit, pledger.debit);
     const value = {
       date: pledger.date,
       explanation: pledger.explanation,

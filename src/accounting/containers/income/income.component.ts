@@ -11,6 +11,7 @@ export class IncomeComponent implements OnInit {
   companyId;
   cashbooks: Cashbook[];
   lastCashBook: Cashbook;
+  saving = false;
 
   constructor(private cashbookService: CashBookService) {
     this.companyId = localStorage.getItem('companyId');
@@ -24,6 +25,10 @@ export class IncomeComponent implements OnInit {
       startAfter: new Date()
     });
 
+    this.getLastCashbook();
+  }
+
+  async getLastCashbook() {
     //get Last Cahsbook entry
     await this.cashbookService
       .getLastCashBook(this.companyId)
@@ -45,6 +50,7 @@ export class IncomeComponent implements OnInit {
   }
 
   async onCreate(event: Cashbook) {
+    this.saving = true;
     console.log(event);
     const lastCashBookSeconds = this.getSecondsFromTimestamp(
       this.lastCashBook.date
@@ -55,14 +61,11 @@ export class IncomeComponent implements OnInit {
         'Date error!! your selected date is earlier than the last cashbook entry'
       );
     } else {
-      await this.cashbookService.create(event);
-      // this.getLastPage();
-      this.onPaginate({
-        companyId: this.companyId,
-        order: 'desc',
-        limit: 5,
-        startAfter: new Date()
+      await this.cashbookService.create(event).then(ref => {
+        this.saving = false;
       });
+
+      this.ngOnInit();
     }
   }
 

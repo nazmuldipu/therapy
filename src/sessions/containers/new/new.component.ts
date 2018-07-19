@@ -16,6 +16,8 @@ export class NewComponent implements OnInit {
   patient: Patient;
   patients: Patient[];
   patientLastSession: PSession;
+  showForm = false;
+  notSaving = true;
   limit = 5;
 
   constructor(
@@ -61,13 +63,18 @@ export class NewComponent implements OnInit {
     this.sessionService.getLastSessionByPatientId(event).subscribe(actions => {
       actions.forEach(action => {
         this.patientLastSession = action as PSession;
+        this.showForm = true;
       });
     });
   }
 
   onCreate(psession: PSession) {
+    this.notSaving = false;
     //set and save session
-    this.sessionService.create(psession);
+    this.sessionService.create(psession).then(ref => {
+      this.notSaving = true;
+      this.showForm = false;
+    });
 
     //set and save ledger
     const pledger = this.createPLedgerFromSession(psession) as PatientLedger;

@@ -1,6 +1,27 @@
 <div class="container-fluid">
   <div class="row my-4">
 
+    <div class="col-12 col-md-6 pl-md-0">
+      <div class="patients">
+        <div class="patients__title d-flex justify-content-between">
+          <h3>
+            <img src="assets/svgs/expense.svg"> Add Expense
+          </h3>
+          <a class="btn__add raised" [routerLink]>
+            <i class="fa fa-window-close-o"></i>&nbsp; Clear
+          </a>
+        </div>
+        <div *ngIf="!saving; else showSaving">
+          <expense-form [lastCashBook]="lastCashBook" (create)="onCreate($event)"></expense-form>
+        </div>
+        <ng-template #showSaving>
+          <div class="message ">
+            <i class="fa fa-refresh "></i>&nbsp; Fee saving...
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
     <div class="col-12 col-md-6">
       <div class="patients">
         <div class="patients__title d-flex justify-content-between">
@@ -27,23 +48,6 @@
             <i class="fa fa-refresh"></i>&nbsp; নগদান বই লোড হচ্ছে ...
           </div>
         </ng-template>
-
-      </div>
-    </div>
-
-    <div class="col-12 col-md-6 pl-md-0">
-      <div class="patients">
-        <div class="patients__title d-flex justify-content-between">
-          <h3>
-            <img src="assets/svgs/expense.svg"> Add Expense
-          </h3>
-          <a class="btn__add raised" [routerLink]>
-            <i class="fa fa-window-close-o"></i>&nbsp; Clear
-          </a>
-        </div>
-        <div>
-          <expense-form [lastCashBook]="lastCashBook" (create)="onCreate($event)"></expense-form>
-        </div>
 
       </div>
     </div>

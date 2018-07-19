@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row my-4">
-    <div class="col-12 col-md-6 ">
+
+    <div class="col-12 col-md-6" *ngIf="!showForm">
       <div class="patients">
         <div class="patients__title d-flex justify-content-between">
           <h3>
@@ -30,7 +31,7 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-6 pl-md-0">
+    <div class="col-12 col-md-6 pl-md-0" *ngIf="showForm">
       <div class="patients">
         <div class="patients__title d-flex justify-content-between">
           <h3>
@@ -40,7 +41,7 @@
             <i class="fa fa-window-close-o"></i>&nbsp; Clear
           </a>
         </div>
-        <div>
+        <div *ngIf="notSaving; else showSaving">
           <session-form [patient]="patient" [lastSession]="patientLastSession" (create)="onCreate($event)"></session-form>
         </div>
         <ng-template #showSaving>

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { User } from 'src/shared/models/users.model';
 import { map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
+import { database } from 'firebase';
 
 @Component({
   selector: 'home-navbar',
@@ -30,13 +31,18 @@ export class HomeNavbarComponent implements OnInit {
           return of(null);
         })
       )
-      .subscribe(data => {
-        if (data) {
-          this.appUser = data as User;
-          localStorage.setItem('companyId', this.appUser.companyId);
+      .subscribe(
+        data => {
+          console.log('subs');
+          if (data) {
+            this.appUser = data as User;
+            localStorage.setItem('companyId', this.appUser.companyId);
+          }
+        },
+        error => {
+          console.log('data loading error');
         }
-        console.log(data);
-      });
+      );
   }
 
   ngOnDestroy() {

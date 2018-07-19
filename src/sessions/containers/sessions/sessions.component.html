@@ -1,42 +1,42 @@
 <div class="container-fluid">
   <div class="row m-0 my-4">
 
-    <div class="col-12 p-0 patient">
+    <!-- <div class="col-12 p-0 patient">
       <div class="patient-head">
         <div class="container">
-          <div class="row">
+          <div class="row"> -->
 
-            <div class="col-12 col-md-6 patients">
-              <div class="patients__title d-flex justify-content-between">
-                <h3>
-                  <img src="assets/svgs/patients.svg"> Session List
-                </h3>
-                <a class="btn__add raised" routerLink="/dashboard/sessions/new">
-                  <i class="fa fa-plus"></i>&nbsp; New Session
-                </a>
-              </div>
+    <div class="col-12 col-md-6 patients">
+      <div class="patients__title d-flex justify-content-between">
+        <h3>
+          <img src="assets/svgs/patients.svg"> Session List
+        </h3>
+        <a class="btn__add raised" routerLink="/dashboard/sessions/new">
+          <i class="fa fa-plus"></i>&nbsp; New Session
+        </a>
+      </div>
 
-              <div *ngIf="psessions; else loading">
-                <div class="message" *ngIf="!psessions.length">
-                  <i class="fa fa-frown-o"></i>&nbsp; No session added yet
-                </div>
-                <div *ngFor="let session of psessions">
-                  <session-item [psession]="session" (edit)="onEdit($event)"></session-item>
-                </div>
-                <paginate-reverse [firstVisibleDate]="psessions[0].updatedAt" [lastVisibleDate]="psessions[psessions.length-1].updatedAt"
-                  (paginate)="onPaginate($event)"></paginate-reverse>
-              </div>
+      <div *ngIf="psessions; else loading">
+        <div class="message" *ngIf="!psessions.length">
+          <i class="fa fa-frown-o"></i>&nbsp; No session added yet
+        </div>
+        <div *ngFor="let session of psessions">
+          <session-item [psession]="session" (edit)="onEdit($event)"></session-item>
+        </div>
+        <paginate-reverse [firstVisibleDate]="psessions[0].updatedAt" [lastVisibleDate]="psessions[psessions.length-1].updatedAt"
+          (paginate)="onPaginate($event)"></paginate-reverse>
+      </div>
 
-              <ng-template #loading>
-                <div class="message">
-                  <i class="fa fa-refresh"></i>&nbsp; Session loading...
-                </div>
-              </ng-template>
+      <ng-template #loading>
+        <div class="message">
+          <i class="fa fa-refresh"></i>&nbsp; Session loading...
+        </div>
+      </ng-template>
 
-            </div>
-          </div>
+    </div>
+    <!-- </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
