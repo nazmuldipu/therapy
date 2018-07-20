@@ -27,6 +27,19 @@ export class CommonService {
     return date;
   }
 
+  getCurrentWeekFirst() {
+    const date = new Date();
+    const firstDay = new Date(date.setDate(date.getDate() - date.getDay() - 1));
+    firstDay.setHours(0, 0, 0);
+    return firstDay;
+  }
+  getCurrentWeekLast() {
+    const date = new Date();
+    const lastDay = new Date(date.setDate(date.getDate() - date.getDay() + 5));
+    lastDay.setHours(23, 59, 59, 999);
+    return lastDay;
+  }
+
   getCurrentMonthFirstDay() {
     const date = new Date();
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);

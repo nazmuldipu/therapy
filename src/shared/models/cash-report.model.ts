@@ -4,6 +4,8 @@ export interface CashReport {
   todayExpense: number;
   yesterdayIncome: number;
   yesterdayExpense: number;
+  thisWeekIncome: number;
+  thisWeekExpense: number;
   thisMonthIncome: number;
   thisMonthExpense: number;
   lastMonthIncome: number;
