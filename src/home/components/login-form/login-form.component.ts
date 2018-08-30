@@ -1,12 +1,6 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/shared/models/users.model';
-import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'login-form',
