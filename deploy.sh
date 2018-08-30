@@ -1,5 +1,6 @@
-git add .
-git commit -m "updated report"
-git push origin dev
+# chmod +x executable
+# git add .
+# git commit -m "updated report"
+# git push origin dev
 ng build --prod --base-href "/"
 ngh --dir dist/therapy --no-silent
