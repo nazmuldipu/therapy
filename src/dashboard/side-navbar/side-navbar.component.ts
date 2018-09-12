@@ -75,7 +75,7 @@ export class SideNavbarComponent implements OnInit {
   }
 
   navigateTo(url: string) {
-    this.sideNav.setSideNavBarCollapse();
+    this.sideNav.collapseNavber();
     this.navUrl = url;
     this.router.navigate([url]);
   }
