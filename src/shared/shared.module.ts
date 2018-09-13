@@ -9,6 +9,7 @@ import { SessionService } from 'src/shared/services/session.service';
 import { PaginateReverseComponent } from './components/paginate-reverse/paginate-reverse.component';
 import { PaginateComponent } from './components/paginate/paginate.component';
 import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { SessionItemComponent } from './components/session-item/session-item.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { CashBookService } from './services/cashbook.service';
@@ -16,7 +17,7 @@ import { CommonService } from './services/common.service';
 import { NavbarService } from './services/navbar.service';
 import { PatientLedgerService } from './services/patient-ledger.service';
 import { PatientService } from './services/patient.service';
-import { SessionItemComponent } from './components/session-item/session-item.component';
+import { ReportService } from './services/report.service';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { SessionItemComponent } from './components/session-item/session-item.com
     PatientService,
     SessionService,
     PatientLedgerService,
-    CashBookService
+    CashBookService,
+    ReportService
   ],
   declarations: [
     PatientListComponent,

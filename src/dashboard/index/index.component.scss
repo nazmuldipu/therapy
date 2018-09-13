@@ -51,6 +51,15 @@
   transition: all 0.95s;
 }
 
+.box {
+  background-color: white;
+  margin-bottom: 1.875rem;
+  border: none;
+  // box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
 .cash-table {
   & tr {
     & td {
@@ -82,4 +91,14 @@
 .bg-deep-purple {
   background-color: #673ab7 !important;
   color: #fff;
+}
+
+#myChart {
+  height: 335px !important;
+}
+
+@media (max-width: 767px) {
+  #myChart {
+    height: 200px !important;
+  }
 }

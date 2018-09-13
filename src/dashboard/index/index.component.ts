@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/internal/operators/take';
 import { Cashbook } from 'src/shared/models/cashbook.model';
+import { Chart } from 'chart.js';
 
 import { CashReport } from '../../shared/models/cash-report.model';
 import { CashBookService } from '../../shared/services/cashbook.service';
@@ -8,6 +9,8 @@ import { CommonService } from '../../shared/services/common.service';
 import { PatientService } from '../../shared/services/patient.service';
 import { SessionService } from '../../shared/services/session.service';
 import { parse } from 'querystring';
+import { ReportService } from 'src/shared/services/report.service';
+import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
 enum OptType {
   TODAY,
@@ -29,10 +32,14 @@ export class IndexComponent implements OnInit {
   currentMonthPatients: number = 0;
   currentMonthSessions: number = 0;
 
+  salesChartButton = 'Week';
+  myChart;
+
   constructor(
     private patientService: PatientService,
     private sessionService: SessionService,
     private cashbookService: CashBookService,
+    private reportService: ReportService,
     private commonService: CommonService
   ) {
     this.companyId = localStorage.getItem('companyId');
@@ -42,6 +49,7 @@ export class IndexComponent implements OnInit {
     this.getPatientsRepo();
     this.getSessionRepo();
     this.getCasbookRepo();
+    this.generateLineChart('Week');
   }
 
   async getPatientsRepo() {
@@ -165,5 +173,90 @@ export class IndexComponent implements OnInit {
             break;
         }
       });
+  }
+
+  async generateLineChart(mode: string) {
+    this.salesChartButton = mode;
+    let labels: string[];
+    let data;
+    let d = new Date();
+
+    switch (mode) {
+      case 'Week':
+        await this.reportService
+          .getWeekCashReport(this.companyId)
+          .subscribe(ref => {
+            data = ref.incomes;
+            this.configLineChart(ref.days, ref.incomes, ref.expenses);
+          });
+
+        break;
+      case 'Month':
+        labels = ['1st', '5th', '10th', '15th', '20th', '25th', '30th'];
+        break;
+    }
+  }
+
+  configLineChart(labels, data1, data2) {
+    let config = {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Income',
+            backgroundColor: '#4faced',
+            borderColor: '#4faced',
+            data: data1,
+            fill: false
+          },
+          {
+            label: 'Expenses',
+            backgroundColor: '#ff6384',
+            borderColor: '#ff6384',
+            data: data2,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        maintainAspectRatio: false,
+        responsive: true,
+        title: {
+          display: false,
+          text: 'Chart.js Line Chart'
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          xAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Days'
+              }
+            }
+          ],
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Value'
+              }
+            }
+          ]
+        }
+      }
+    };
+
+    this.myChart = new Chart('myChart', config);
   }
 }

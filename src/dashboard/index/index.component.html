@@ -1,6 +1,8 @@
-<div class="container">
-  <div class="row my-2">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+<div class="container-fluid">
+
+  <div class="row my-3">
+
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3">
       <div class="info-box hover-expand-effect">
         <div class="icon bg-deep-purple">
           <i class="fa fa-user-md"></i>
@@ -12,7 +14,7 @@
       </div>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3">
       <div class="info-box hover-expand-effect">
         <div class="icon bg-green">
           <i class="fa fa-hourglass-half"></i>
@@ -24,7 +26,7 @@
       </div>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-12 col-sm-6 col-md-3 col-lg-3">
       <div class="info-box hover-expand-effect">
         <div class="icon bg-teal">
           <i class="fa fa-money"></i>
@@ -35,12 +37,38 @@
         </div>
       </div>
     </div>
+
   </div>
 
   <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <div class="box">
+        <div class="row m-0 p-3">
+          <div class="col">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Product sales</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item">Sales</button>
+                <button class="dropdown-item">Total sales</button>
+                <button class="dropdown-item">Profit</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col text-right">
+            <button class="m-1 btn" [ngClass]="salesChartButton == 'Week'?'btn-primary':''" (click)="generateLineChart('Week')">Week</button>
+            <button class="m-1 btn" [ngClass]="salesChartButton == 'Month'?'btn-primary':''" (click)="generateLineChart('Month')">Month</button>
+          </div>
+        </div>
+
+        <canvas id="myChart"></canvas>
+
+      </div>
+    </div>
+
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-      <div class="card">
-        <div class="body bg-teal">
+      <div class="card box">
+        <div class="body bg-teal ">
           <div class="m-3">
             <h5>আয় ব্যয় তথ্য</h5>
           </div>

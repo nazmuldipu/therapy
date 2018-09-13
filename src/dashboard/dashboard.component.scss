@@ -1,0 +1,23 @@
+.dashboard {
+  padding-top: 54px !important;
+}
+.side-nav-offset {
+  padding-left: 300px;
+  padding-right: 0;
+}
+.col-md-12 {
+  transition: padding-left 0.7s;
+}
+side-navbar {
+  transition: padding-left 0.7s;
+}
+
+.container-fluid {
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .side-nav-offset {
+    padding-left: 0;
+  }
+}
