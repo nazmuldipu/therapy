@@ -17,12 +17,12 @@ export class ReportService {
     private CommonService: CommonService
   ) {}
 
-  getWeekCashReport(companyId) {
-    // declare variables;
+  getWeekCashReport(companyId: string, mode: string) {
+    let numberOfDays = 0;
     let incomes = [];
     let expenses = [];
     let reqUrl = [];
-    let days = ['Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'];
+    let days = [];
 
     // declare and adjust day firt time and day last time
     const dayFirst = new Date();
@@ -30,15 +30,38 @@ export class ReportService {
     const dayLast = new Date();
     dayLast.setHours(23, 59, 59);
 
-    // adjust day array last day is today
-    for (var i = 0; i < 6 - dayFirst.getDay(); i += 1) {
-      days.push(days.shift());
+    switch (mode) {
+      case 'Week':
+        days = ['শুক্র', 'শনি', 'রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহস্পতি'];
+        numberOfDays = 7;
+        dayFirst.setDate(dayFirst.getDate() - numberOfDays - 1);
+        dayLast.setDate(dayLast.getDate() - numberOfDays - 1);
+        // adjust day array last day is today
+        for (var i = 0; i < 6 - dayFirst.getDay(); i += 1) {
+          days.push(days.shift());
+        }
+        break;
+      case 'Month':
+        // days = [1,2,3,4,5,6,7,8, 9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+        var mdays = [];
+        var today = new Date();
+        var day_length = 1000 * 60 * 60 * 24; //the length of a day in milliseconds
+        numberOfDays = 31;
+        today.setDate(today.getDate() - numberOfDays);
+        for (var i = 0; i < numberOfDays; i++) {
+          today.setDate(today.getDate() + 1);
+          days.push(today.toLocaleDateString());
+          // console.log(today.toLocaleDateString());
+        }
+
+        dayFirst.setDate(dayFirst.getDate() - numberOfDays);
+        dayLast.setDate(dayLast.getDate() - numberOfDays);
+        // console.log(days);
+        break;
     }
-    dayFirst.setDate(dayFirst.getDate() - 6);
-    dayLast.setDate(dayLast.getDate() - 6);
 
     //preparign request for forkjoin
-    for (var i = 0; i < 7; i += 1) {
+    for (var i = 0; i < numberOfDays; i += 1) {
       reqUrl.push(this.getCashReportDateBetween(companyId, dayFirst, dayLast));
       dayFirst.setDate(dayFirst.getDate() + 1);
       dayLast.setDate(dayLast.getDate() + 1);
@@ -54,7 +77,7 @@ export class ReportService {
       })
     );
   }
-  
+
   getCashReportDateBetween(companyId, start: Date, end: Date) {
     let income = 0;
     let expense = 0;

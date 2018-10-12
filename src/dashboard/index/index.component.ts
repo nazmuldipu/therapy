@@ -177,24 +177,11 @@ export class IndexComponent implements OnInit {
 
   async generateLineChart(mode: string) {
     this.salesChartButton = mode;
-    let labels: string[];
-    let data;
-    let d = new Date();
-
-    switch (mode) {
-      case 'Week':
-        await this.reportService
-          .getWeekCashReport(this.companyId)
-          .subscribe(ref => {
-            data = ref.incomes;
-            this.configLineChart(ref.days, ref.incomes, ref.expenses);
-          });
-
-        break;
-      case 'Month':
-        labels = ['1st', '5th', '10th', '15th', '20th', '25th', '30th'];
-        break;
-    }
+    await this.reportService
+      .getWeekCashReport(this.companyId, mode)
+      .subscribe(ref => {
+        this.configLineChart(ref.days, ref.incomes, ref.expenses);
+      });
   }
 
   configLineChart(labels, data1, data2) {
