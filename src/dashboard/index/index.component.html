@@ -114,32 +114,34 @@
             <a class="m-1 btn btn-success raised btn-sm" routerLink="/dashboard/accounting/cashbook">নগদান বই</a>
           </div>
         </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">তারিখ</th>
-              <th scope="col">বিস্তারিত</th>
-              <th scope="col">ডেভিড</th>
-              <th scope="col">ক্রেডিট</th>
-              <th scope="col">ব্যালেন্স</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="recentCashbooks; else loading">
-            <tr *ngIf="!recentCashbooks.length">
-              <th scope="row" colspan="5">
-                <i class="fa fa-frown-o"></i>&nbsp; এখনো কোন নগদান নেই</th>
+        <div class="table-responsive-sm">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">তারিখ</th>
+                <th scope="col">বিস্তারিত</th>
+                <th scope="col">ডেভিড</th>
+                <th scope="col">ক্রেডিট</th>
+                <th scope="col">ব্যালেন্স</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="recentCashbooks; else loading">
+              <tr *ngIf="!recentCashbooks.length">
+                <th scope="row" colspan="5">
+                  <i class="fa fa-frown-o"></i>&nbsp; এখনো কোন নগদান নেই</th>
 
-            </tr>
-            <tr *ngFor="let  cashbook of recentCashbooks">
-              <th scope="row">{{ cashbook?.date.seconds * 1000 | date:'dd-MM-yyyy'}}</th>
-              <td>{{cashbook?.explanation}}</td>
-              <td>{{cashbook?.debit}}</td>
-              <td>{{cashbook?.credit}}</td>
-              <td class="font-weight-bold">{{cashbook?.balance}}</td>
-            </tr>
+              </tr>
+              <tr *ngFor="let  cashbook of recentCashbooks">
+                <th scope="row">{{ cashbook?.date.seconds * 1000 | date:'dd/MM/yy'}}</th>
+                <td>{{cashbook?.explanation}}</td>
+                <td>{{cashbook?.debit}}</td>
+                <td>{{cashbook?.credit}}</td>
+                <td class="font-weight-bold">{{cashbook?.balance}}</td>
+              </tr>
 
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
         <ng-template #loading>
           <div class="message lead text-center my-3">
             <i class="fa fa-refresh"></i>&nbsp; নগদান বই লোড হচ্ছে ...
@@ -157,31 +159,33 @@
             <a class="m-1 btn btn-success raised btn-sm" routerLink="/dashboard/sessions">সেশন তালিকা</a>
           </div>
         </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">তারিখ</th>
-              <th scope="col">নাম</th>
-              <th scope="col">সেশন নম্বর</th>
-              <th scope="col">চিকিৎসা</th>
+        <div class="table-responsive-sm">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">তারিখ</th>
+                <th scope="col">নাম</th>
+                <th scope="col">সেশন নম্বর</th>
+                <th scope="col">চিকিৎসা</th>
 
-            </tr>
-          </thead>
-          <tbody *ngIf="recentSessions; else loading">
-            <tr *ngIf="!recentSessions.length">
-              <th scope="row" colspan="5">
-                <i class="fa fa-frown-o"></i>&nbsp; এখনো কোন নগদান নেই</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="recentSessions; else loading">
+              <tr *ngIf="!recentSessions.length">
+                <th scope="row" colspan="5">
+                  <i class="fa fa-frown-o"></i>&nbsp; এখনো কোন নগদান নেই</th>
 
-            </tr>
-            <tr *ngFor="let  psession of recentSessions">
-              <th scope="row">{{psession?.date.seconds * 1000 | date:'dd-MM-yyyy'}}</th>
-              <td>{{ psession?.patientName}}</td>
-              <td>{{ psession?.sessionNumber }}</td>
-              <td>{{ psession?.treatments}}</td>
-            </tr>
+              </tr>
+              <tr *ngFor="let  psession of recentSessions">
+                <th scope="row">{{psession?.date.seconds * 1000 | date:'dd/MM/yyyy'}}</th>
+                <td>{{ psession?.patientName}}</td>
+                <td>{{ psession?.sessionNumber }}</td>
+                <td>{{ psession?.treatments}}</td>
+              </tr>
 
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
         <ng-template #loading>
           <div class="message lead text-center my-3">
             <i class="fa fa-refresh"></i>&nbsp; তথ্য লোড হচ্ছে ...
