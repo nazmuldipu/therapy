@@ -11,6 +11,7 @@ import { SessionService } from '../../shared/services/session.service';
 import { parse } from 'querystring';
 import { ReportService } from 'src/shared/services/report.service';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import { PSession } from 'src/shared/models/session.model';
 
 enum OptType {
   TODAY,
@@ -31,6 +32,8 @@ export class IndexComponent implements OnInit {
   cash: number = 0;
   currentMonthPatients: number = 0;
   currentMonthSessions: number = 0;
+  recentCashbooks: Cashbook[];
+  recentSessions: PSession[];
 
   salesChartButton = 'Week';
   myChart;
@@ -50,6 +53,14 @@ export class IndexComponent implements OnInit {
     this.getSessionRepo();
     this.getCasbookRepo();
     this.generateLineChart('Week');
+    const value = {
+      companyId: this.companyId,
+      order: 'desc',
+      limit: 8,
+      startAfter: new Date()
+    };
+    this.getLastCashbooks(value);
+    this.getLastSessions(value);
   }
 
   async getPatientsRepo() {
@@ -245,5 +256,25 @@ export class IndexComponent implements OnInit {
     };
 
     this.myChart = new Chart('myChart', config);
+  }
+
+  async getLastCashbooks({ companyId, order, limit, startAfter }: any) {
+    await this.cashbookService
+      .getPaginatedStartAfter(companyId, order, limit, startAfter)
+      .subscribe(data => {
+        if (data.length) {
+          this.recentCashbooks = data;
+        }
+      });
+  }
+
+  async getLastSessions({ companyId, order, limit, startAfter }: any) {
+    await this.sessionService
+      .getPaginatedStartAfter(companyId, order, limit, startAfter)
+      .subscribe(data => {
+        if (data.length) {
+          this.recentSessions = data;
+        }
+      });
   }
 }
