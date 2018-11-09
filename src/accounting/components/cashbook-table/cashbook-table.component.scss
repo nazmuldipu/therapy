@@ -1,4 +1,4 @@
-.patients {
+.cashbook {
   position: relative;
   background: #fff;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
@@ -41,24 +41,5 @@
   font: {
     weight: 600;
     size: 13px;
-  }
-}
-// .message {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   width: 100%;
-//   padding: 30px;
-//   font-size: 22px;
-//   font-weight: 500;
-//   img {
-//     margin: 0 10px 0 0;
-//   }
-// }
-
-.change-limit {
-  font-weight: 600;
-  select {
-    font-size: 18px;
   }
 }

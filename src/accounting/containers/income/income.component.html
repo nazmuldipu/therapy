@@ -23,7 +23,8 @@
     </div>
 
     <div class="col-12 col-md-6">
-      <div class="patients">
+      <cashbook-table [cashbooks]="cashbooks" (pagigate)="onPaginate($event)" [showLoading]="showLoading"></cashbook-table>
+      <!-- <div class="patients">
         <div class="patients__title d-flex justify-content-between">
           <h3>
             <img src="assets/svgs/money.svg"> নগদান বই
@@ -49,7 +50,7 @@
           </div>
         </ng-template>
 
-      </div>
+      </div> -->
     </div>
 
   </div>

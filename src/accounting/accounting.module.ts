@@ -10,6 +10,7 @@ import { FeeFormComponent } from './components/fee-form/fee-form.component';
 import { CashbookItemComponent } from './components/cashbook-item/cashbook-item.component';
 import { ExpenseFormComponent } from './components/expense-form/expense-form.component';
 import { IncomeFormComponent } from './components/income-form/income-form.component';
+import { CashbookTableComponent } from './components/cashbook-table/cashbook-table.component';
 
 // routes
 export const ROUTES: Routes = [
@@ -41,7 +42,8 @@ export const ROUTES: Routes = [
     FeeFormComponent,
     CashbookItemComponent,
     ExpenseFormComponent,
-    IncomeFormComponent
+    IncomeFormComponent,
+    CashbookTableComponent
   ]
 })
 export class AccountingModule {}

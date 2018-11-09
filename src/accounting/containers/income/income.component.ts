@@ -12,6 +12,7 @@ export class IncomeComponent implements OnInit {
   cashbooks: Cashbook[];
   lastCashBook: Cashbook;
   saving = false;
+  showLoading = false;
 
   constructor(private cashbookService: CashBookService) {
     this.companyId = localStorage.getItem('companyId');
@@ -40,12 +41,14 @@ export class IncomeComponent implements OnInit {
   }
 
   async onPaginate({ companyId, order, limit, startAfter }: any) {
+    this.showLoading = true;
     await this.cashbookService
       .getPaginatedStartAfter(companyId, order, limit, startAfter)
       .subscribe(data => {
         if (data.length) {
           this.cashbooks = data;
         }
+        this.showLoading = false;
       });
   }
 

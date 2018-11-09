@@ -1,0 +1,41 @@
+<div class="cashbook">
+  <div class="cashbook__title d-flex justify-content-between">
+    <h3>
+      <img src="assets/svgs/money.svg"> নগদান বই
+    </h3>
+    <button class="btn btn-sm btn-success mx-2 raised" (click)="recalculate()">
+      <i class="fa fa-recycle" aria-hidden="true"></i> পুনঃগণনা</button>
+    <a class="btn__add raised" routerLink="/dashboard/accounting/collect-fee">
+      <i class="fa fa-money"></i>&nbsp; ফী সংগ্রহ
+    </a>
+  </div>
+
+  <div>
+    <div *ngIf="!showLoading else loading">
+      <table class="table table-sm table-striped table-hover">
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Debit</th>
+          <th>Credit</th>
+          <th>Balance</th>
+        </tr>
+        <tr *ngFor="let ca of cashbooks; let i = index">
+          <td>{{ ca?.date.seconds * 1000 | date:'dd-MM-yyyy'}}</td>
+          <td>{{ca.explanation}}</td>
+          <td>{{ca.debit}}</td>
+          <td>{{ca.credit}}</td>
+          <th> {{ca.balance}}</th>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="cashbooks">
+      <paginate [firstVisibleDate]="cashbooks[0]?.createdAt" [lastVisibleDate]="cashbooks[cashbooks.length-1]?.createdAt" (paginate)="onPaginate($event)"></paginate>
+    </div>
+    <ng-template #loading>
+      <div class="message">
+        <i class="fa fa-refresh"></i>&nbsp; নগদান বই লোড হচ্ছে ...
+      </div>
+    </ng-template>
+  </div>
+</div>

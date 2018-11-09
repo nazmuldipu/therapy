@@ -14,16 +14,20 @@ import {
   styleUrls: ['./paginate.component.scss']
 })
 export class PaginateComponent {
-  @Input('firstVisibleDate') firstVisibleDate: any;
-  @Input('lastVisibleDate') lastVisibleDate: any;
+  @Input('firstVisibleDate')
+  firstVisibleDate: any;
+  @Input('lastVisibleDate')
+  lastVisibleDate: any;
 
-  @Output() paginate = new EventEmitter<any>();
+  @Output()
+  paginate = new EventEmitter<any>();
 
   companyId;
-  limit = 5;
+  limit;
 
   constructor() {
     this.companyId = localStorage.getItem('companyId');
+    this.limit = 5;
   }
 
   getPaginated(companyId, orderBy, order, limit, startAfter) {

@@ -23,33 +23,7 @@
     </div>
 
     <div class="col-12 col-md-6">
-      <div class="patients">
-        <div class="patients__title d-flex justify-content-between">
-          <h3>
-            <img src="assets/svgs/money.svg"> নগদান বই
-          </h3>
-          <a class="btn__add raised" routerLink="/dashboard/accounting/collect-fee">
-            <i class="fa fa-money"></i>&nbsp; ফী সংগ্রহ
-          </a>
-        </div>
-
-        <div *ngIf="cashbooks; else loading">
-          <div class="message" *ngIf="!cashbooks.length">
-            <i class="fa fa-frown-o"></i>&nbsp; এখনো কোন নগদান নেই
-          </div>
-          <div *ngFor="let cashbook of cashbooks">
-            <cashbook-item [cashbook]="cashbook"></cashbook-item>
-          </div>
-          <paginate [firstVisibleDate]="cashbooks[0].createdAt" [lastVisibleDate]="cashbooks[cashbooks.length-1].createdAt" (paginate)="onPaginate($event)"></paginate>
-        </div>
-
-        <ng-template #loading>
-          <div class="message">
-            <i class="fa fa-refresh"></i>&nbsp; নগদান বই লোড হচ্ছে ...
-          </div>
-        </ng-template>
-
-      </div>
+      <cashbook-table [cashbooks]="cashbooks" (pagigate)="onPaginate($event)" [showLoading]="showLoading"></cashbook-table>
     </div>
 
   </div>

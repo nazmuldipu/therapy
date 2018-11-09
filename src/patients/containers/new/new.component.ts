@@ -44,8 +44,8 @@ export class NewComponent implements OnInit {
       requiredTests: this.fb.array([''])
     }),
     fees: this.fb.group({
-      prescribeFee: ['500', Validators.required],
-      sessionFee: ['300', Validators.required]
+      prescribeFee: [500, Validators.required],
+      sessionFee: [300, Validators.required]
     })
   });
 
