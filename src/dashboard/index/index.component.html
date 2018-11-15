@@ -1,12 +1,8 @@
 <div class="container-fluid">
-
   <div class="row my-3">
-
     <div class="col-12 col-sm-6 col-md-3 col-lg-3">
       <div class="info-box hover-expand-effect">
-        <div class="icon bg-deep-purple">
-          <i class="fa fa-user-md"></i>
-        </div>
+        <div class="icon bg-deep-purple"><i class="fa fa-user-md"></i></div>
         <div class="content">
           <div class="text">THIS MONTH PATIENTS</div>
           <div class="number">{{ currentMonthPatients }}</div>
@@ -16,9 +12,7 @@
 
     <div class="col-12 col-sm-6 col-md-3 col-lg-3">
       <div class="info-box hover-expand-effect">
-        <div class="icon bg-green">
-          <i class="fa fa-hourglass-half"></i>
-        </div>
+        <div class="icon bg-green"><i class="fa fa-hourglass-half"></i></div>
         <div class="content">
           <div class="text">THIS MONTH SESSIONS</div>
           <div class="number">{{ currentMonthSessions }}</div>
@@ -28,43 +22,47 @@
 
     <div class="col-12 col-sm-6 col-md-3 col-lg-3">
       <div class="info-box hover-expand-effect">
-        <div class="icon bg-teal">
-          <i class="fa fa-money"></i>
-        </div>
+        <div class="icon bg-teal"><i class="fa fa-money"></i></div>
         <div class="content">
           <div class="text">CASH</div>
           <div class="number">{{ cashReport?.balance }} ৳</div>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
       <div class="box">
         <div class="row m-0 p-3">
-          <div class="col">
-
-          </div>
+          <div class="col"></div>
 
           <div class="col text-right">
-            <button class="m-1 btn" [ngClass]="salesChartButton == 'Week'?'btn-primary':''" (click)="generateLineChart('Week')">Week</button>
-            <button class="m-1 btn" [ngClass]="salesChartButton == 'Month'?'btn-primary':''" (click)="generateLineChart('Month')">Month</button>
+            <button
+              class="m-1 btn"
+              [ngClass]="salesChartButton == 'Week' ? 'btn-primary' : ''"
+              (click)="generateLineChart('Week')"
+            >
+              Week
+            </button>
+            <button
+              class="m-1 btn"
+              [ngClass]="salesChartButton == 'Month' ? 'btn-primary' : ''"
+              (click)="generateLineChart('Month')"
+            >
+              Month
+            </button>
           </div>
         </div>
 
         <canvas id="myChart"></canvas>
-
       </div>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
       <div class="card box">
         <div class="body bg-teal ">
-          <div class="m-3">
-            <h5>আয় ব্যয় তথ্য</h5>
-          </div>
+          <div class="m-3"><h5>আয় ব্যয় তথ্য</h5></div>
           <table class="table cash-table">
             <tr>
               <td></td>
@@ -73,31 +71,30 @@
             </tr>
             <tr>
               <td>আজ</td>
-              <td>{{ cashReport?.todayIncome | currency:"&#x9f3;"}}</td>
-              <td>{{ cashReport?.todayExpense | currency:"&#x9f3;"}}</td>
+              <td>{{ cashReport?.todayIncome | currency: '&#x9f3;' }}</td>
+              <td>{{ cashReport?.todayExpense | currency: '&#x9f3;' }}</td>
             </tr>
             <tr>
               <td>গতকাল</td>
-              <td>{{ cashReport?.yesterdayIncome | currency:"&#x9f3;"}}</td>
-              <td>{{ cashReport?.yesterdayExpense | currency:"&#x9f3;"}}</td>
+              <td>{{ cashReport?.yesterdayIncome | currency: '&#x9f3;' }}</td>
+              <td>{{ cashReport?.yesterdayExpense | currency: '&#x9f3;' }}</td>
             </tr>
             <tr>
               <td>চলতি সপ্তাহ</td>
-              <td>{{ cashReport?.thisWeekIncome | currency:"&#x9f3;"}}</td>
-              <td>{{ cashReport?.thisWeekExpense | currency:"&#x9f3;"}}</td>
+              <td>{{ cashReport?.thisWeekIncome | currency: '&#x9f3;' }}</td>
+              <td>{{ cashReport?.thisWeekExpense | currency: '&#x9f3;' }}</td>
             </tr>
             <tr>
               <td>চলতি মাস</td>
-              <td>{{ cashReport?.thisMonthIncome | currency:"&#x9f3;"}}</td>
-              <td>{{ cashReport?.thisMonthExpense | currency:"&#x9f3;"}}</td>
+              <td>{{ cashReport?.thisMonthIncome | currency: '&#x9f3;' }}</td>
+              <td>{{ cashReport?.thisMonthExpense | currency: '&#x9f3;' }}</td>
             </tr>
             <tr>
               <td>বিগত মাস</td>
-              <td>{{ cashReport?.lastMonthIncome | currency:"&#x9f3;"}}</td>
-              <td>{{ cashReport?.lastMonthExpense | currency:"&#x9f3;" }}</td>
+              <td>{{ cashReport?.lastMonthIncome | currency: '&#x9f3;' }}</td>
+              <td>{{ cashReport?.lastMonthExpense | currency: '&#x9f3;' }}</td>
             </tr>
           </table>
-
         </div>
       </div>
     </div>
@@ -107,11 +104,13 @@
     <div class="col-12 col-md-6">
       <div class="box">
         <div class="row m-0 p-3">
-          <div class="col lead">
-            সাম্প্রতিক লেনদেন
-          </div>
+          <div class="col lead">সাম্প্রতিক লেনদেন</div>
           <div class="col text-right">
-            <a class="m-1 btn btn-success raised btn-sm" routerLink="/dashboard/accounting/cashbook">নগদান বই</a>
+            <a
+              class="m-1 btn btn-success raised btn-sm"
+              routerLink="/dashboard/accounting/cashbook"
+              >নগদান বই</a
+            >
           </div>
         </div>
         <div class="table-responsive-sm">
@@ -125,20 +124,21 @@
                 <th scope="col">ব্যালেন্স</th>
               </tr>
             </thead>
-            <tbody *ngIf="recentCashbooks; else loading">
+            <tbody *ngIf="recentCashbooks; else: loading">
               <tr *ngIf="!recentCashbooks.length">
                 <th scope="row" colspan="5">
-                  <i class="fa fa-frown-o"></i>&nbsp; এখনো কোন নগদান নেই</th>
-
+                  <i class="fa fa-frown-o"></i>&nbsp; এখনো কোন নগদান নেই
+                </th>
               </tr>
-              <tr *ngFor="let  cashbook of recentCashbooks">
-                <th scope="row">{{ cashbook?.date.seconds * 1000 | date:'dd/MM/yy'}}</th>
-                <td>{{cashbook?.explanation}}</td>
-                <td>{{cashbook?.debit}}</td>
-                <td>{{cashbook?.credit}}</td>
-                <td class="font-weight-bold">{{cashbook?.balance}}</td>
+              <tr *ngFor="let cashbook of recentCashbooks">
+                <th scope="row">
+                  {{ cashbook?.date.seconds * 1000 | date: 'dd/MM/yy' }}
+                </th>
+                <td>{{ cashbook?.explanation }}</td>
+                <td>{{ cashbook?.debit }}</td>
+                <td>{{ cashbook?.credit }}</td>
+                <td class="font-weight-bold">{{ cashbook?.balance }}</td>
               </tr>
-
             </tbody>
           </table>
         </div>
@@ -152,11 +152,13 @@
     <div class="col-12 col-md-6">
       <div class="box">
         <div class="row m-0 p-3">
-          <div class="col lead">
-            সাম্প্রতিক সেশনগুলো
-          </div>
+          <div class="col lead">সাম্প্রতিক সেশনগুলো</div>
           <div class="col text-right">
-            <a class="m-1 btn btn-success raised btn-sm" routerLink="/dashboard/sessions">সেশন তালিকা</a>
+            <a
+              class="m-1 btn btn-success raised btn-sm"
+              routerLink="/dashboard/sessions"
+              >সেশন তালিকা</a
+            >
           </div>
         </div>
         <div class="table-responsive-sm">
@@ -167,22 +169,22 @@
                 <th scope="col">নাম</th>
                 <th scope="col">সেশন নম্বর</th>
                 <th scope="col">চিকিৎসা</th>
-
               </tr>
             </thead>
-            <tbody *ngIf="recentSessions; else loading">
+            <tbody *ngIf="recentSessions; else: loading">
               <tr *ngIf="!recentSessions.length">
                 <th scope="row" colspan="5">
-                  <i class="fa fa-frown-o"></i>&nbsp; এখনো কোন নগদান নেই</th>
-
+                  <i class="fa fa-frown-o"></i>&nbsp; এখনো কোন সেশন নেই
+                </th>
               </tr>
-              <tr *ngFor="let  psession of recentSessions">
-                <th scope="row">{{psession?.date.seconds * 1000 | date:'dd/MM/yyyy'}}</th>
-                <td>{{ psession?.patientName}}</td>
+              <tr *ngFor="let psession of recentSessions">
+                <th scope="row">
+                  {{ psession?.date.seconds * 1000 | date: 'dd/MM/yyyy' }}
+                </th>
+                <td>{{ psession?.patientName }}</td>
                 <td>{{ psession?.sessionNumber }}</td>
-                <td>{{ psession?.treatments}}</td>
+                <td>{{ psession?.treatments }}</td>
               </tr>
-
             </tbody>
           </table>
         </div>
@@ -194,3 +196,4 @@
       </div>
     </div>
   </div>
+</div>

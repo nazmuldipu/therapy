@@ -22,8 +22,35 @@ export class LoginComponent {
     this.login = false;
   }
 
-  onRegister(event: User) {
-    console.log(event);
+  onRegister(event) {
+    // this.showBusy = true;
+    this.auth
+      .register(event.email, event.password)
+      .then(ref => {
+        let returnUrl = '/login';
+        this.auth
+          .saveUserInfoFromForm(
+            ref.user.uid,
+            event.name,
+            event.email,
+            event.password
+          )
+          .then(ref => {
+            // this.showBusy = false;
+            this.router.navigateByUrl(returnUrl);
+            location.reload();
+          })
+          .catch(error => {
+            console.log('USER SAVIG ERROR', error);
+            this.errorMessage = error.message;
+            // this.showBusy = false;
+          });
+      })
+      .catch(error => {
+        console.log('REGISTRATION ERROR', error);
+        this.errorMessage = error.message;
+        // this.showBusy = false;
+      });
   }
 
   onLogin(event: User) {

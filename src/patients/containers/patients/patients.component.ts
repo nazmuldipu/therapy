@@ -31,6 +31,7 @@ export class PatientsComponent implements OnInit {
       .getPaginatedStartAfter(companyId, order, limit, startAfter)
       .pipe(take(2))
       .subscribe(data => {
+        console.log(this.patients);
         this.patients = data;
       });
   }

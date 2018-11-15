@@ -49,7 +49,7 @@ export class CollectFeeComponent implements OnInit {
       .getPaginatedStartAfter(companyId, order, limit, startAfter)
       .subscribe(data => {
         this.patients = data;
-
+        console.log(data);
         this.firstVisibleDate = this.patients[0].updatedAt;
         this.lastVisibleDate = this.patients[
           this.patients.length - 1
@@ -90,12 +90,21 @@ export class CollectFeeComponent implements OnInit {
     this.patient.balance = event.balance;
     const cashbook = this.createCashbookFromPatientLedger(event);
 
-    const lastCashBookSeconds = this.getSecondsFromTimestamp(
-      this.lastCashBook.date
-    );
-    const lastLedgerSeconds = this.getSecondsFromTimestamp(
-      this.lastLedger.date
-    );
+    let lastCashBookSeconds;
+    if (this.lastCashBook) {
+      lastCashBookSeconds = this.getSecondsFromTimestamp(
+        this.lastCashBook.date
+      );
+    } else {
+      lastCashBookSeconds = 0;
+    }
+
+    let lastLedgerSeconds;
+    if (this.lastLedger) {
+      lastLedgerSeconds = this.getSecondsFromTimestamp(this.lastLedger.date);
+    } else {
+      lastLedgerSeconds = 0;
+    }
 
     if (
       this.lastLedger &&

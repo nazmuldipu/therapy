@@ -264,6 +264,8 @@ export class IndexComponent implements OnInit {
       .subscribe(data => {
         if (data.length) {
           this.recentCashbooks = data;
+        } else {
+          this.recentCashbooks = [];
         }
       });
   }
@@ -274,6 +276,8 @@ export class IndexComponent implements OnInit {
       .subscribe(data => {
         if (data.length) {
           this.recentSessions = data;
+        } else {
+          this.recentSessions = [];
         }
       });
   }
