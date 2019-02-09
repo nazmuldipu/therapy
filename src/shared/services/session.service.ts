@@ -65,7 +65,7 @@ export class SessionService {
     limit,
     startAfter
   ) {
-    // console.log(companyId, order, limit, startAfter);
+    console.log(companyId, order, limit, startAfter);
     return this.afs
       .collection(this.serviceUrl, ref =>
         ref
